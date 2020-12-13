@@ -1,0 +1,94 @@
+#!/bin/bash
+
+picom --experimental-backend &
+
+#Put monitor on the left
+screen=$(xrandr | grep HDMI-A-0 | sed "s/ /;/g" | awk -F';' '{print $2}')
+
+case $screen in
+	"connected")xrandr --output eDP --primary --mode 1366x768 --pos 1920x163 --rotate normal --output HDMI-A-0 --mode 1920x1200 --pos 0x0 --rotate normal;;
+	*);;
+esac
+
+#Set wallpaper and start compositor
+nitrogen --restore
+
+##SET DWM BAR##
+
+#Functions
+dat(){
+	dat=$(date +"%a, %d %b")
+	echo -e $dat
+}
+tim(){
+	tim=$(date +"%H:%M")
+	echo -e $tim
+}
+
+while (true); do
+	curl wttr.in/Palosco?format='%C+%t' > /home/mario/.local/bin/wheather.txt
+	sleep 3600s
+done &
+while (true); do
+	df -H | grep sda5 | sed "s/sda5/sda5;/g ; s/G/G;/g ; s/\s*//g" | awk -F';' '{print $4 "/" $2 " " 100-$3 "%"}' > /home/mario/.local/bin/disk.txt
+	sleep 600s
+done &	
+bat(){ battery=$(cat /sys/class/power_supply/BAT0/capacity)
+	status=$(cat /sys/class/power_supply/BAT0/status)
+	if [[ "$battery" -gt 75 ]]; then
+			icon=$""
+	elif [[ "$battery" -le 75 ]] && [[ "$battery" -gt 50 ]]; then
+			icon=$""
+	elif [[ "$battery" -gt 33 ]] && [[ "$battery" -le 50 ]]; then
+			icon=$""
+	elif [[ "$battery" -gt 10 ]] && [[ "$battery" -le 33 ]]; then
+			icon=$""
+	else
+			icon=$""
+	fi
+	if [[ $status = "Discharging" ]]; then 
+		echo "$icon $battery%"
+	else 
+		echo "$icon $battery%"
+	fi
+}	
+
+volume(){
+	STATUS=$(amixer sget Master | tail -n1 | sed -r "s/.*\[(.*)\]/\1/")
+	VOL=$(amixer get Master | tail -n1 | sed -r "s/.*\[(.*)%\].*/\1/")
+	if [ "$STATUS" = "off" ]; then
+			    printf "🔇"
+		else
+			if [ "$VOL" -gt 0 ] && [ "$VOL" -le 33 ]; then
+			    printf "🔈 %s%%" "$VOL"
+			elif [ "$VOL" -gt 33 ] && [ "$VOL" -le 66 ]; then
+			    printf "🔉 %s%%" "$VOL"
+			else
+			    printf "🔊 %s%%" "$VOL"
+	        fi
+	fi
+}
+
+#Loop to write on the bar
+while(true); do
+whtr=$(cat /home/mario/.local/bin/wheather.txt)
+mem=$(free -h | awk '/^Mem:/ {print $3 "/" $2}')
+disk=$(cat /home/mario/.local/bin/disk.txt)
+song=$(cat /home/mario/.local/bin/song.txt)
+if [[ "$song" != "" ]]; then
+	xsetroot -name "[ $song] [ $whtr] [ $mem] [$(volume)] [$(bat)] [ $(dat)] [ $(tim)]"
+else 
+	xsetroot -name "[ $whtr] [ $mem] [$(volume)] [$(bat)] [ $(dat)] [ $(tim)]"
+fi	
+	sleep 5s
+done &
+#[ $disk]
+##Start notification daemon##
+dunst &
+
+##Start lockscreen daemon##
+/home/mario/.local/bin/scripts/lockscreen &
+
+#Start dwm#
+exec dwm
+
