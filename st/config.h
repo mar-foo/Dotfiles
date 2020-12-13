@@ -5,7 +5,8 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "Mononoki-Nerd:pixelsize=15:antialias=true:autohint=true";
+static char *font = "Fira Code:pixelsize=12:antialias=true:autohint=true";
+static char *font2[] = { "Font Awesome"};
 static int borderpx = 0;
 
 /*
@@ -93,57 +94,71 @@ char *termname = "st-256color";
  */
 unsigned int tabspaces = 8;
 
+/* bg opacity*/
+float alpha = 0.7;
+
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
 	/* 8 normal colors */
-	"black",
-	"red3",
-	"green3",
-	"yellow3",
-	"blue2",
-	"magenta3",
-	"cyan3",
-	"gray90",
-
+	/*"black",*/
+	/*"red3",*/
+	/*"green3",*/
+	/*"yellow3",*/
+	/*"blue2",*/
+	/*"magenta3",*/
+	/*"cyan3",*/
+	/*"gray90",*/
+/**/
 	/* 8 bright colors */
-	"gray50",
-	"red",
-	"green",
-	"yellow",
-	"blue2",
-	"magenta",
-	"cyan",
-	"white",
+	/*"gray50",*/
+	/*"red",*/
+	/*"green",*/
+	/*"yellow",*/
+	/*"blue2",*/
+	/*"magenta",*/
+	/*"cyan",*/
+	/*"white",*/
 
-	[255] = 0,
+	/*[255] = 0,*/
 
-	/* more colors can be added after 255 to use with DefaultXX 
-	"#cccccc",
-	"#555555",*/
+	/* more colors can be added after 255 to use with DefaultXX*/ 
+	/*"#cccccc",*/
+	/*"#555555",*/
+	/*"black",*/
 	/*DRACULA color scheme*/
   /* 8 normal colors */
-/*  [0] = "#000000",*/ /* black   */
-/*  [1] = "#ff5555",*/ /* red     */
-/*  [2] = "#50fa7b",*/ /* green   */
-/*  [3] = "#f1fa8c",*/ /* yellow  */
-/*  [4] = "#bd93f9",*/ /* blue    */
-/*  [5] = "#ff79c6",*/ /* magenta */
-/*  [6] = "#8be9fd",*/ /* cyan    */
-/*  [7] = "#bbbbbb",*/ /* white   */
+  [0] = "#000000", /* black   */
+  [1] = "#ff5555", /* red     */
+  /*[2] = "#50fa7b",*/ /* green   */
+  [2] = "#f97406", /* green   */
+  /*[3] = "#f1fa8c",*/ /* yellow  */
+  [3] = "#d2df04", /* yellow  */
+  /*[4] = "#bd93f9",*/ /* blue    */
+  [4] = "#f95006", /* blue    */
+  [5] = "#ff79c6", /* magenta */
+  /*[6] = "#8be9fd",*/ /* cyan    */
+  [6] = "#2b2b2b", /* cyan    */
+  [7] = "#1e1e1e", /* white   */
 
   /* 8 bright colors */
-/*  [8]  = "#44475a", /* black   */
-/*  [9]  = "#ff5555", /* red     */
-/*  [10] = "#50fa7b", /* green   */
-/*  [11] = "#f1fa8c", /* yellow  */
-/*  [12] = "#bd93f9", /* blue    */
-/*  [13] = "#ff79c6", /* magenta */
-/*  [14] = "#8be9fd", /* cyan    */
-/*  [15] = "#ffffff", /* white   */
+  [8]  = "#000000", /*black   */
+  [9]  = "#ff5555", /*red     */
+  /*[10] = "#50fa7b",*/ /*green   */
+  [10] = "#f97406", /*green   */
+  /*[11] = "#f1fa8c",*/ /*yellow  */
+  [11] = "#d2df04", /*yellow  */
+  /*[12] = "#bd93f9",*/ /*blue    */
+  [12] = "#f95006", /*blue    */
+  [13] = "#ff79c6", /*magenta */
+  /*[14] = "#8be9fd",*/ /*cyan    */
+  [14] = "#2b2b2b", /*cyan    */
+  [15] = "#ffffff", /*white   */
 
   /* special colors */
-/*  [256] = "#282a36", /* background */
-/*  [257] = "#f8f8f2", /* foreground */
+  [255] = "#1e1e1e", /*background */
+  [256] = "#282a36", /*background */
+  [257] = "#f8f8f2", /*foreground */
+  [258] = "#f95006",
 	/*SOLARIZED DARK*/
 /*	"#073642",*/  /*  0: black    */
 /*	"#dc322f",*/  /*  1: red      */
@@ -167,16 +182,24 @@ static const char *colorname[] = {
 
 
 
-/*Default colors (colorname index) foreground, background, cursor */ 
+/*Default colors (colorname index) foreground, background, cursor 
 unsigned int defaultfg = 7;
-unsigned int defaultbg = 0;
-static unsigned int defaultcs = 7;
-static unsigned int defaultrcs =257;
-/*DRACULA
+unsigned int defaultbg = 258;
+static unsigned int defaultcs = 256;
+static unsigned int defaultrcs =257;*/
+/*DRACULA*/
 unsigned int defaultfg = 257;
-unsigned int defaultbg = 256;
-static unsigned int defaultcs = 257;
-static unsigned int defaultrcs = 257;
+unsigned int defaultbg = 0;
+static unsigned int defaultcs = 258;
+static unsigned int defaultrcs = 258;
+
+/*
+ * Colors used, when the specific fg == defaultfg. So in reverse mode this
+ * will reverse too. Another logic would only make the simple feature too
+ * complex.
+ */
+/*unsigned int defaultitalic = 258;
+unsigned int defaultunderline = 258;
 */
 /*Solarized
 unsigned int defaultfg = 12;
@@ -243,16 +266,16 @@ static Shortcut shortcuts[] = {
 	{ ControlMask,          XK_Print,       toggleprinter,  {.i =  0} },
 	{ ShiftMask,            XK_Print,       printscreen,    {.i =  0} },
 	{ XK_ANY_MOD,           XK_Print,       printsel,       {.i =  0} },
-	{ TERMMOD,              XK_Prior,       zoom,           {.f = +1} },
-	{ TERMMOD,              XK_Next,        zoom,           {.f = -1} },
+	{ ControlMask,	        XK_k,	        zoom,           {.f = +1} },
+	{ ControlMask,          XK_j,           zoom,           {.f = -1} },
 	{ TERMMOD,              XK_Home,        zoomreset,      {.f =  0} },
 	{ TERMMOD,              XK_C,           clipcopy,       {.i =  0} },
 	{ TERMMOD,              XK_V,           clippaste,      {.i =  0} },
 	{ TERMMOD,              XK_Y,           selpaste,       {.i =  0} },
 	{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
 	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
-	{ ShiftMask,		XK_Page_Up,	kscrollup,	{.i = -1} },
-	{ ShiftMask, 		XK_Page_Down,	kscrolldown,	{.i = -1} },
+	{ MODKEY,		XK_k,		kscrollup,	{.i = -1} },
+	{ MODKEY, 		XK_j,		kscrolldown,	{.i = -1} },
 };
 
 /*
