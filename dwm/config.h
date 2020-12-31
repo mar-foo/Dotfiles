@@ -8,11 +8,11 @@ static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "Fira Code:size=8", "Font Awesome" };
 static const char dmenufont[]       = "monospace:size=8";
-static const char col_gray1[]       = "#01244b";
+static const char col_gray1[]       = "#333333";
 static const char col_gray2[]       = "#1e1e1e";
 static const char col_gray3[]       = "#ffffff";
 static const char col_gray4[]       = "#000000";
-static const char col_cyan[]        = "#61e50d";
+static const char col_cyan[]        = "#900000";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
@@ -40,6 +40,7 @@ static const Rule rules[] = {
 	{ NULL,		 NULL,       "calcurse",               	               1<<7,              1,	      0,           -1 },
 	{ NULL,		 NULL,	     "neomutt",				       1<<5,		  1,	      0,	   -1 },
 	{ "qTox",	 NULL,	     NULL,				       1<<5,	          1,          0,           -1 },
+	{ NULL,		 NULL,	     "newsboat",			       1<<5,		  1,	      0,	   -1 },
 };
 
 /* layout(s) */
@@ -72,7 +73,7 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
 static const char *termcmd[]  = { "st", NULL };
 static const char scratchpadname[] = "scratchpad";
 static const char *scratch[]  = { "st", "-t", scratchpadname, "-g", "120x34", NULL };
-static const char *helpcmd[]  = { "/home/mario/suckless/dwm_test/keybinds/keybinds.sh", NULL };
+static const char *helpcmd[]  = { "/home/mario/Github/suckless/dwm/keybinds/keybinds.sh", NULL };
 //My bindings
 //System
 static const char *shutcmd []  = { "/home/mario/.local/bin/scripts/shtdwn.sh", NULL };
@@ -86,9 +87,10 @@ static const char *emacscmd[]  = { "emacs", NULL};
 static const char *otticmd []  = { "/home/mario/.local/bin/scripts/Lab_ottica.sh", NULL};
 static const char *editcmd []  = { "st", "nvim", NULL };
 static const char *calendar[]  = { "/home/mario/.local/bin/scripts/calendar.sh", NULL };
-static const char *mailcmd []  = { "st", "neomutt", NULL };
+static const char *mailcmd []  = { "/home/mario/.local/bin/scripts/mail.sh", NULL };
 static const char *workcmd []  = { "/home/mario/.local/bin/scripts/work.sh", NULL };
 static const char *toxcmd  []  = { "/home/mario/Github/qTox/qtox", NULL};
+static const char *newscmd []  = { "st", "-e", "newsboat", "-r", NULL };
 //Music
 static const char *musicmd []  = { "/home/mario/.local/bin/scripts/play.sh" , NULL };
 static const char *pausecmd[]  = { "/home/mario/.local/bin/scripts/pause.sh", NULL};
@@ -121,6 +123,7 @@ static Key keys[] = {
 	{ MODKEY,			XK_g,	   spawn,	   {.v = mailcmd } },
 	{ MODKEY|ShiftMask,		XK_semicolon, spawn,	   {.v = workcmd } },
 	{ MODKEY,			XK_t,	   spawn,	   {.v = toxcmd  } },
+	{ MODKEY,			XK_y,	   spawn,	   {.v = newscmd } },
 	//Music and volume
 	{ MODKEY,	 	        XK_slash, spawn,	   {.v = musicmd } },
 	{ MODKEY,			XK_p,	   spawn, 	   {.v = pausecmd} },

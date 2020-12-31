@@ -1,2 +1,2 @@
 #!/bin/sh
-zathura ~/suckless/dwm_test/keybinds/keybinds.pdf
+zathura ~/Github/suckless/dwm/keybinds/keybinds.pdf
