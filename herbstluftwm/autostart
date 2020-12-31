@@ -1,0 +1,245 @@
+#!/usr/bin/env bash
+
+# this is a simple config for herbstluftwm
+#Load keymap settings and monitor settings
+source /home/mario/.xsession
+
+hc() {
+    herbstclient "$@"
+}
+
+hc emit_hook reload
+
+xsetroot -solid '#5A8E3A'
+
+# remove all existing keybindings
+hc keyunbind --all
+
+#Autostart
+TERMINAL="st"
+nitrogen --restore
+dunst &
+picom --experimental-backend &
+calcurse --daemon
+
+
+#Variable definition
+#tag_names=( "" "" "" "" "" "" "" ""  "" )
+Vifm_TAG=""
+Tor_TAG=""
+Mocp_TAG=""
+Neomutt_TAG=""
+Newsboat_TAG=""
+Tox_TAG=""
+Calcurse_TAG=""
+Mpv_TAG=""
+# keybindings
+# if you have a super key you will be much happier with Mod set to Mod4
+#Mod=Mod1    # Use alt as the main modifier
+Mod=Mod4   # Use the super key as the main modifier
+
+hc keybind $Mod-Shift-q quit
+hc keybind $Mod-Shift-r reload
+hc keybind $Mod-Return spawn ${TERMINAL:-xterm} # use your $TERMINAL with xterm as fallback
+
+# basic movement
+# focusing clients
+hc keybind $Mod-Left  focus left
+hc keybind $Mod-Down  focus down
+hc keybind $Mod-Up    focus up
+hc keybind $Mod-Right focus right
+hc keybind $Mod-h     focus left
+hc keybind $Mod-j     focus down
+hc keybind $Mod-k     focus up
+hc keybind $Mod-l     focus right
+
+# moving clients
+hc keybind $Mod-Shift-Left  shift left
+hc keybind $Mod-Shift-Down  shift down
+hc keybind $Mod-Shift-Up    shift up
+hc keybind $Mod-Shift-Right shift right
+hc keybind $Mod-Shift-h     shift left
+hc keybind $Mod-Shift-j     shift down
+hc keybind $Mod-Shift-k     shift up
+hc keybind $Mod-Shift-l     shift right
+
+# splitting frames
+# create an empty frame at the specified direction
+#hc keybind $Mod-u       split   bottom  0.5
+#hc keybind $Mod-o       split   right   0.5
+hc keybind $Mod-Mod1-h	chain , split   left    0.5 , focus left
+hc keybind $Mod-Mod1-j	chain , split   bottom  0.5 , focus down
+hc keybind $Mod-Mod1-k	chain , split   top     0.5 , focus up
+hc keybind $Mod-Mod1-l	chain , split   right   0.5 , focus right
+# let the current frame explode into subframes
+hc keybind $Mod-Control-space split explode
+
+# resizing frames
+resizestep=0.05
+hc keybind $Mod-Control-h       resize left +$resizestep
+hc keybind $Mod-Control-j       resize down +$resizestep
+hc keybind $Mod-Control-k       resize up +$resizestep
+hc keybind $Mod-Control-l       resize right +$resizestep
+hc keybind $Mod-Control-Left    resize left +$resizestep
+hc keybind $Mod-Control-Down    resize down +$resizestep
+hc keybind $Mod-Control-Up      resize up +$resizestep
+hc keybind $Mod-Control-Right   resize right +$resizestep
+
+#Sticky windows
+hc new_attr string my_sticky
+hc keybind $Mod-Mod1-s spawn ~/.config/herbstluftwm/sticky.sh stick
+
+# tags
+#tag_names=( {1..9} )
+tag_names=( "" "" "" "" "" "" "" "" "" "")
+tag_keys=( {1..9} 0 )
+
+hc rename default "${tag_names[0]}" || true
+for i in ${!tag_names[@]} ; do
+    hc add "${tag_names[$i]}"
+    key="${tag_keys[$i]}"
+    if ! [ -z "$key" ] ; then
+        hc keybind "$Mod-$key" chain , use_index "$i" , spawn ~/.config/herbstluftwm/sticky.sh get-sticky
+        hc keybind "$Mod-Shift-$key" move_index "$i"
+    fi
+done
+
+
+# cycle through monitors
+hc keybind $Mod-period cycle_monitor +1
+hc keybind $Mod-comma  cycle_monitor -1
+hc keybind $Mod-Shift-period chain , shift_to_monitor +1 , cycle_monitor +1
+hc keybind $Mod-Shift-comma chain , shift_to_monitor -1 , cycle_monitor -1
+
+# layouting
+hc keybind $Mod-r remove
+hc keybind $Mod-q floating toggle
+hc keybind $Mod-e fullscreen toggle
+hc keybind $Mod-Control-p pseudotile toggle
+# The following cycles through the available layouts within a frame, but skips
+# layouts, if the layout change wouldn't affect the actual window positions.
+# I.e. if there are two windows within a frame, the grid layout is skipped.
+hc keybind $Mod-Shift-space                                                           \
+            or , and . compare tags.focus.curframe_wcount = 2                   \
+                     . cycle_layout +1 grid horizontal vertical max grid    \
+               , cycle_layout +1
+
+# mouse
+hc mouseunbind --all
+hc mousebind $Mod-Button1 move
+hc mousebind $Mod-Button2 zoom
+hc mousebind $Mod-Button3 resize
+
+# focus
+#hc keybind $Mod-BackSpace   cycle_monitor
+hc keybind $Mod-Tab use_previous
+hc keybind $Mod-Shift-Tab   cycle_all -1
+hc keybind $Mod-Shift-i jumpto urgent
+
+#My bindings
+hc keybind $Mod-space spawn ~/.config/herbstluftwm/scratchpad.sh
+hc keybind $Mod-d close_or_remove
+hc keybind $Mod-Shift-semicolon spawn $HOME/.local/bin/scripts/work.sh
+hc keybind $Mod-semicolon spawn dmenu_run
+hc keybind $Mod-a chain , use $Calcurse_TAG , spawn st -e calcurse
+hc keybind $Mod-f chain , use $Vifm_TAG , spawn st -e vifm "$HOME/Documents/University" "$HOME"
+hc keybind $Mod-g chain , use $Neomutt_TAG , spawn /home/mario/.local/bin/scripts/mail.sh
+hc keybind $Mod-s spawn $HOME/.local/bin/scripts/tor.sh #chain , use $Tor_TAG , spawn torbrowser-launcher
+hc keybind $Mod-t chain , use $Tox_TAG , spawn qtox
+hc keybind $Mod-x chain , use $Mpv_TAG , spawn devour ~/.local/bin/scripts/myyt -r
+hc keybind $Mod-y chain , use $Newsboat_TAG , spawn st -e newsboat
+hc keybind $Mod-BackSpace spawn $HOME/.local/bin/scripts/shtdwn.sh
+hc keybind $Mod-Shift-BackSpace spawn $HOME/.local/bin/scripts/lock
+hc keybind $Mod-Shift-c close_and_remove
+hc keybind $Mod-c spawn ~/.config/herbstluftwm/calculator.sh
+hc keybind $Mod-v spawn ~/.config/herbstluftwm/video.sh
+hc keybind $Mod-m spawn ~/.config/herbstluftwm/music.sh
+
+#Music
+hc keybind $Mod-slash chain , use $Mocp_TAG , spawn ~/.local/bin/scripts/play.sh
+hc keybind $Mod-minus spawn amixer sset Master 5%-
+hc keybind $Mod-Shift-equal spawn amixer sset Master 5%+
+hc keybind $Mod-p spawn $HOME/.local/bin/scripts/pause.sh
+hc keybind $Mod-Shift-p spawn $HOME/.local/bin/scripts/stop.sh
+hc keybind $Mod-n spawn mocp -f
+hc keybind $Mod-b spawn mocp -r
+hc keybind $Mod-Shift-v spawn pavucontrol
+#Rotation
+hc keyunbind $Mod-Right
+hc keyunbind $Mod-Left
+hc keybind $Mod-Right rotate
+hc keybind $Mod-Left chain , lock , rotate , rotate , rotate , unlock
+
+
+
+# theme
+hc attr theme.tiling.reset 1
+hc attr theme.floating.reset 1
+hc set frame_border_active_color '#900000'
+hc set frame_border_normal_color '#333333'
+hc set frame_bg_normal_color '#333333'
+hc set frame_bg_active_color '#900000'
+hc set frame_border_width 2
+hc set always_show_frame 0
+hc set frame_bg_transparent 1
+hc set frame_transparent_width 0
+hc set frame_gap 10
+
+hc attr theme.active.color '#900000'
+hc attr theme.normal.color '#333333'
+hc attr theme.urgent.color orange
+hc attr theme.inner_width 1
+hc attr theme.inner_color '#333333'
+hc attr theme.border_width 2
+hc attr theme.floating.border_width 2
+hc attr theme.floating.outer_width 1
+hc attr theme.floating.outer_color '#333333'
+hc attr theme.active.inner_color '#900000'
+hc attr theme.active.outer_color '#900000'
+hc attr theme.background_color '#333333'
+
+hc set window_gap 5
+hc set frame_padding 1
+hc set smart_window_surroundings 1
+hc set smart_frame_surroundings 0
+hc set mouse_recenter_gap 100
+
+# rules
+hc unrule -F
+#hc rule class=XTerm tag=3 # move all xterms to tag 3
+hc rule focus=on # normally focus new clients
+#hc rule focus=off # normally do not focus new clients
+# give focus to most common terminals
+#hc rule class~'(.*[Rr]xvt.*|.*[Tt]erm|Konsole)' focus=on
+hc rule windowtype~'_NET_WM_WINDOW_TYPE_(DIALOG|UTILITY|SPLASH)' pseudotile=on
+hc rule windowtype='_NET_WM_WINDOW_TYPE_DIALOG' focus=on
+hc rule windowtype~'_NET_WM_WINDOW_TYPE_(NOTIFICATION|DOCK|DESKTOP)' manage=off
+hc rule class='Gcr-prompter' pseudotile=on
+hc rule class='Abrowser' tag=$Tor_TAG switchtag=on focus=on
+hc rule class='Tor Browser' tag=$Tor_TAG
+hc rule wintitle='mocp' tag=$Mocp_TAG focus=on switchtotag=on
+hc rule class='mpv' tag=$Mpv_TAG focus=on switchtotag=on
+hc rule class='qTox' tag=$Tox_TAG focus=on switchontag=on
+
+
+# unlock, just to be sure
+hc unlock
+
+herbstclient set tree_style '╾│ ├└╼─┐'
+
+# do multi monitor setup here, e.g.:
+#Monitor in ufficio
+#hc set_monitors 1280x800+0+1024 1280x1024+0+0
+#Monitor a casa
+#hc set_monitors 1280x800+1920+0 1920x1200+0+0
+# or simply:
+hc detect_monitors
+
+# find the panel
+panel=~/.config/herbstluftwm/panel.sh
+[ -x "$panel" ] || panel=/etc/xdg/herbstluftwm/panel.sh
+for monitor in $(herbstclient list_monitors | cut -d: -f1) ; do
+    # start it on each monitor
+    "$panel" $monitor &
+done
+#$HOME/.local/bin/bar.sh | lemonbar &
