@@ -95,7 +95,7 @@ char *termname = "st-256color";
 unsigned int tabspaces = 8;
 
 /* bg opacity*/
-float alpha = 0.7;
+float alpha = 0.9;
 
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
@@ -108,7 +108,7 @@ static const char *colorname[] = {
 	/*"magenta3",*/
 	/*"cyan3",*/
 	/*"gray90",*/
-/**/
+	/**/
 	/* 8 bright colors */
 	/*"gray50",*/
 	/*"red",*/
@@ -121,72 +121,73 @@ static const char *colorname[] = {
 
 	/*[255] = 0,*/
 
-	/* more colors can be added after 255 to use with DefaultXX*/ 
+	/* more colors can be added after 255 to use with DefaultXX*/
 	/*"#cccccc",*/
 	/*"#555555",*/
 	/*"black",*/
 	/*DRACULA color scheme*/
-  /* 8 normal colors */
-  [0] = "#000000", /* black   */
-  [1] = "#ff5555", /* red     */
-  /*[2] = "#50fa7b",*/ /* green   */
-  [2] = "#f97406", /* green   */
-  /*[3] = "#f1fa8c",*/ /* yellow  */
-  [3] = "#d2df04", /* yellow  */
-  /*[4] = "#bd93f9",*/ /* blue    */
-  [4] = "#f95006", /* blue    */
-  [5] = "#ff79c6", /* magenta */
-  /*[6] = "#8be9fd",*/ /* cyan    */
-  [6] = "#2b2b2b", /* cyan    */
-  [7] = "#1e1e1e", /* white   */
+	/* 8 normal colors */
+	[0] = "#000000", /* black   */
+	[1] = "#900000", /* red     */
+	/*[2] = "#50fa7b",*/ /* green   */
+	[2] = "#61e50d", /* green   */
+	/*[3] = "#f1fa8c",*/ /* yellow  */
+	[3] = "#d2df04", /* yellow  */
+	/*[4] = "#bd93f9",*/ /* blue    */
+	[4] = "#01244b", /* blue    */
+	[5] = "#ff79c6", /* magenta */
+	/*[6] = "#8be9fd",*/ /* cyan    */
+	[6] = "#2b2b2b", /* cyan    */
+	[7] = "#ffffff", /* white   */
 
-  /* 8 bright colors */
-  [8]  = "#000000", /*black   */
-  [9]  = "#ff5555", /*red     */
-  /*[10] = "#50fa7b",*/ /*green   */
-  [10] = "#f97406", /*green   */
-  /*[11] = "#f1fa8c",*/ /*yellow  */
-  [11] = "#d2df04", /*yellow  */
-  /*[12] = "#bd93f9",*/ /*blue    */
-  [12] = "#f95006", /*blue    */
-  [13] = "#ff79c6", /*magenta */
-  /*[14] = "#8be9fd",*/ /*cyan    */
-  [14] = "#2b2b2b", /*cyan    */
-  [15] = "#ffffff", /*white   */
+	/* 8 bright colors */
+	[8]  = "#000000", /*black   */
+	[9]  = "#900000", /*red     */
+	/*[10] = "#50fa7b",*/ /*green   */
+	[10] = "#61e50d", /*green   */
+	/*[11] = "#f1fa8c",*/ /*yellow  */
+	[11] = "#d2df04", /*yellow  */
+	/*[12] = "#bd93f9",*/ /*blue    */
+	[12] = "#900000", /*blue    */
+	[13] = "#ff79c6", /*magenta */
+	/*[14] = "#8be9fd",*/ /*cyan    */
+	[14] = "#2b2b2b", /*cyan    */
+	[15] = "#ffffff", /*white   */
 
-  /* special colors */
-  [255] = "#1e1e1e", /*background */
-  [256] = "#282a36", /*background */
-  [257] = "#f8f8f2", /*foreground */
-  [258] = "#f95006",
+	/* special colors */
+	[255] = "#1e1e1e", /*background */
+	/*[256] = "#282a36",*/ /*background */
+	[256] = "#01244b",
+	[257] = "#f8f8f2", /*foreground */
+	[258] = "#900000",
 	/*SOLARIZED DARK*/
-/*	"#073642",*/  /*  0: black    */
-/*	"#dc322f",*/  /*  1: red      */
-/*	"#859900",*/  /*  2: green    */
-/*	"#b58900",*/  /*  3: yellow   */
-/*	"#268bd2",*/  /*  4: blue     */
-/*	"#d33682",*/  /*  5: magenta  */
-/*	"#2aa198",*/  /*  6: cyan     */
-/*	"#eee8d5",*/  /*  7: white    */
+	/*	"#073642",*/  /*  0: black    */
+	/*	"#dc322f",*/  /*  1: red      */
+	/*	"#859900",*/  /*  2: green    */
+	/*	"#b58900",*/  /*  3: yellow   */
+	/*	"#268bd2",*/  /*  4: blue     */
+	/*	"#d33682",*/  /*  5: magenta  */
+	/*	"#2aa198",*/  /*  6: cyan     */
+	/*	"#eee8d5",*/  /*  7: white    */
 	/* bright */
-/*	"#002b36",*/  /*  8: brblack  */
-/*	"#cb4b16",*/  /*  9: brred    */
-/*	"#586e75",*/  /* 10: brgreen  */
-/*	"#657b83",*/  /* 11: bryellow */
-/*	"#839496",*/  /* 12: brblue   */
-/*	"#6c71c4",*/  /* 13: brmagenta*/
-/*	"#93a1a1",*/  /* 14: brcyan   */
-/*	"#fdf6e3",*/  /* 15: brwhite  */
+	/*	"#002b36",*/  /*  8: brblack  */
+	/*	"#cb4b16",*/  /*  9: brred    */
+	/*	"#586e75",*/  /* 10: brgreen  */
+	/*	"#657b83",*/  /* 11: bryellow */
+	/*	"#839496",*/  /* 12: brblue   */
+	/*	"#6c71c4",*/  /* 13: brmagenta*/
+	/*	"#93a1a1",*/  /* 14: brcyan   */
+	/*	"#fdf6e3",*/  /* 15: brwhite  */
 
 };
 
 
 
-/*Default colors (colorname index) foreground, background, cursor 
-unsigned int defaultfg = 7;
-unsigned int defaultbg = 258;
-static unsigned int defaultcs = 256;
-static unsigned int defaultrcs =257;*/
+/*Default colors (colorname index) foreground, background, cursor
+  unsigned int defaultfg = 7;
+  unsigned int defaultbg = 258;
+  static unsigned int defaultcs = 256;
+  static unsigned int defaultrcs =257;*/
 /*DRACULA*/
 unsigned int defaultfg = 257;
 unsigned int defaultbg = 0;
@@ -199,14 +200,14 @@ static unsigned int defaultrcs = 258;
  * complex.
  */
 /*unsigned int defaultitalic = 258;
-unsigned int defaultunderline = 258;
-*/
+  unsigned int defaultunderline = 258;
+  */
 /*Solarized
-unsigned int defaultfg = 12;
-unsigned int defaultbg = 256;
-static unsigned int defaultcs = 14;
-static unsigned int defaultrcs = 15;
-*/ 
+  unsigned int defaultfg = 12;
+  unsigned int defaultbg = 256;
+  static unsigned int defaultcs = 14;
+  static unsigned int defaultrcs = 15;
+  */
 /*
  * Default shape of cursor
  * 2: Block ("█")
@@ -250,7 +251,7 @@ static uint forcemousemod = ShiftMask;
 static MouseShortcut mshortcuts[] = {
 	/* mask                 button   function        argument       release */
 	{ XK_ANY_MOD,           Button2, selpaste,       {.i = 0},      1 },
-	{ ShiftMask,            Button4, kscrollup,      {.i = 1} }, 
+	{ ShiftMask,            Button4, kscrollup,      {.i = 1} },
 	{ XK_ANY_MOD,           Button4, ttysend,        {.s = "\031"} },
 	{ ShiftMask,            Button5, kscrolldown,	 {.i = 1} },
 	{ XK_ANY_MOD,           Button5, ttysend,        {.s = "\005"} },
@@ -544,6 +545,6 @@ static uint selmasks[] = {
  * of single wide characters.
  */
 static char ascii_printable[] =
-	" !\"#$%&'()*+,-./0123456789:;<=>?"
-	"@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_"
-	"`abcdefghijklmnopqrstuvwxyz{|}~";
+" !\"#$%&'()*+,-./0123456789:;<=>?"
+"@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_"
+"`abcdefghijklmnopqrstuvwxyz{|}~";
