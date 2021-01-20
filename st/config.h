@@ -95,7 +95,7 @@ char *termname = "st-256color";
 unsigned int tabspaces = 8;
 
 /* bg opacity*/
-float alpha = 0.9;
+float alpha = 0.8;
 
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
@@ -128,13 +128,13 @@ static const char *colorname[] = {
 	/*DRACULA color scheme*/
 	/* 8 normal colors */
 	[0] = "#000000", /* black   */
-	[1] = "#900000", /* red     */
+	[1] = "#222222", /* red     */
 	/*[2] = "#50fa7b",*/ /* green   */
 	[2] = "#61e50d", /* green   */
 	/*[3] = "#f1fa8c",*/ /* yellow  */
 	[3] = "#d2df04", /* yellow  */
 	/*[4] = "#bd93f9",*/ /* blue    */
-	[4] = "#01244b", /* blue    */
+	[4] = "#900000", /* blue    */
 	[5] = "#ff79c6", /* magenta */
 	/*[6] = "#8be9fd",*/ /* cyan    */
 	[6] = "#2b2b2b", /* cyan    */
@@ -142,24 +142,24 @@ static const char *colorname[] = {
 
 	/* 8 bright colors */
 	[8]  = "#000000", /*black   */
-	[9]  = "#900000", /*red     */
+	[9]  = "#ababab", /*red     */
 	/*[10] = "#50fa7b",*/ /*green   */
 	[10] = "#61e50d", /*green   */
 	/*[11] = "#f1fa8c",*/ /*yellow  */
 	[11] = "#d2df04", /*yellow  */
 	/*[12] = "#bd93f9",*/ /*blue    */
-	[12] = "#900000", /*blue    */
+	[12] = "#ffffff", /*blue    */
 	[13] = "#ff79c6", /*magenta */
 	/*[14] = "#8be9fd",*/ /*cyan    */
 	[14] = "#2b2b2b", /*cyan    */
 	[15] = "#ffffff", /*white   */
 
 	/* special colors */
-	[255] = "#1e1e1e", /*background */
+	[255] = "#000000", /*background */
 	/*[256] = "#282a36",*/ /*background */
 	[256] = "#01244b",
 	[257] = "#f8f8f2", /*foreground */
-	[258] = "#900000",
+	[258] = "#ffffff",
 	/*SOLARIZED DARK*/
 	/*	"#073642",*/  /*  0: black    */
 	/*	"#dc322f",*/  /*  1: red      */
