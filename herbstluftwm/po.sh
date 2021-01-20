@@ -21,10 +21,10 @@ width=${mrect[2]}
 height=${mrect[3]}
 
 rect=(
-    $((width))
-    $((height-15))
-    $((${mrect[0]}))
-    $((${mrect[1]}+15))
+    $((width/3))
+    $((height/2))
+    $((${mrect[0]}+3*(width/5)))
+    $((${mrect[1]}+(height/2)))
 )
 
 hc add "$tag"
@@ -54,6 +54,7 @@ show() {
 hide() {
     # if q3terminal still is focused, then focus the previously focused monitor
     # (that mon which was focused when starting q3terminal)
+    # hc chain , lock , use $tag , close_and_remove , use_previous , unlock
     hc substitute M monitors.by-name."$monitor".my_prev_focus \
         and + compare monitors.focus.name = "$monitor" \
             + focus_monitor M

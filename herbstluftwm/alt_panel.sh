@@ -16,7 +16,7 @@ font="-*-fixed-medium-*-*-*-12-*-*-*-*-*-*-*"
 font1="-*-Font-Awesome-*-*-*-12-*-*-*-*-*-*-*"
 bgcolor=$(hc get frame_border_normal_color)
 selbg=$(hc get window_border_active_color)
-selfg='#000000'
+selfg='#101010'
 
 ####
 # Try to find textwidth binary.
@@ -95,13 +95,13 @@ hc pad $monitor $panel_height
                     echo -n "^bg(#9CA668)^fg(#141414)"
                     ;;
                 ':')
-                    echo -n "^bg(#141414)^fg(#ffffff)"
+                    echo -n "^bg()^fg(#900000)"
                     ;;
                 '!')
                     echo -n "^bg(#FF0675)^fg(#141414)"
                     ;;
                 *)
-                    echo -n "^bg()^fg(#bbbbbb)"
+                    echo -n "^bg()^fg(#ababab)"
                     ;;
             esac
             if [ ! -z "$dzen2_svn" ] ; then
@@ -119,51 +119,8 @@ hc pad $monitor $panel_height
         echo -n "$separator"
         echo -n "^bg()^fg() ${windowtitle//^/^^} "
 
-	#VPN
-	vpn=$(grep "ected" ~/.local/bin/vpn.txt)
-	if [[ $vpn = "Connected!" ]]; then
-		vp="^fg(#61e50d)VPN^bg()"
-	else
-		vp="^fg()VPN^bg()"
-	fi
-
-	#Battery
-	battery=$(cat /sys/class/power_supply/BAT0/capacity)
-	status=$(cat /sys/class/power_supply/BAT0/status)
-	if [[ "$battery" -gt 75 ]]; then
-		icon=$""
-	elif [[ "$battery" -le 75 ]] && [[ "$battery" -gt 50 ]]; then
-		icon=$""
-	elif [[ "$battery" -gt 33 ]] && [[ "$battery" -le 50 ]]; then
-		icon=$""
-	elif [[ "$battery" -gt 10 ]] && [[ "$battery" -le 33 ]]; then
-		icon=$""
-	else
-		icon=$""
-	fi
-	if [[ $status = "Discharging" ]]; then
-		#bat="^fg()^fn(FontAwesome:size=12)$icon^fn() ^fg()^fn($font)$battery^fg()%^fn()"
-		bat="^fg(#ababab)BAT:^fg()$battery^fg()%"
-	else
-		#bat="^fg()^fn(FontAwesome:size=12)$icon^fn() ^fg()$battery^fg()%"
-		bat="^fg(#61e50d)BAT:^fg()$battery^fg()%"
-	fi
-
-	#Memory
-	#mem=$(free -h | grep '^Mem' | awk '{print $3*$2/100}')
-	#Memory=$(echo $mem | dbar -nonl)
-	#Mem="^fg(#ababab)MEM:^fg()$Memory"
-
-	#Volume
-	VOL=$(amixer get Master | tail -n1 | sed -r "s/.*\[(.*)%\].*/\1/")
-	vol="^fg(#ababab)VOL:^fg()$VOL^fg()%"
-
-	#song
-	SONG=$(cat $HOME/.local/bin/song.txt)
-	song="^fg()$SONG $separator"
-
         # small adjustments
-	right="$song $vol $separator $vp $separator ^fg()$bat $separator^bg() $date $separator"
+	right="$separator^bg() $date $separator"
         right_text_only=$(echo -n "$right" | sed 's.\^[^(]*([^)]*)..g')
         # get width of right aligned text.. and add some space..
         width=$($textwidth "$font" "$right_text_only    ")
@@ -227,4 +184,5 @@ hc pad $monitor $panel_height
 
 } 2> /dev/null | dzen2 -w $panel_width -x $x -y $y -fn "$font" -fn "$font1" -h $panel_height \
     -e 'button3=;button4=exec:herbstclient use_index -1;button5=exec:herbstclient use_index +1' \
-    -ta l -bg "$bgcolor" -fg '#ffffff'
+    -ta l -bg "$bgcolor" -fg '#efefef'
+

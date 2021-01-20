@@ -12,7 +12,7 @@
 #
 # If a tag name is supplied, this is used instead of the scratchpad
 
-tag=""
+tag=
 hc() { "${herbstclient_command[@]:-herbstclient}" "$@" ;}
 
 mrect=( $(hc monitor_rect "" ) )
@@ -21,15 +21,15 @@ width=${mrect[2]}
 height=${mrect[3]}
 
 rect=(
-    $((width))
-    $((height-15))
-    $((${mrect[0]}))
-    $((${mrect[1]}+15))
+    $((width/2))
+    $((height/2))
+    $((${mrect[0]}+(width/4)))
+    $((${mrect[1]}+(height/4)))
 )
 
 hc add "$tag"
 
-monitor=video
+monitor=scratchpad
 
 exists=false
 if ! hc add_monitor $(printf "%dx%d%+d%+d" "${rect[@]}") \
@@ -61,3 +61,4 @@ hide() {
 }
 
 [ $exists = true ] && hide || show
+
