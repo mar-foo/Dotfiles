@@ -4,4 +4,4 @@
 #convert /tmp/screenshot.png -blur 0x20 /tmp/screenshotblur.png
 #convert /tmp/screenshotblur.png /home/mario/Pictures/Trisquell_full.png -gravity center -composite -matte /tmp/screenlock.png
 #i3lock -e -i /tmp/screenlock.png
-i3lock -e -i "/home/mario/Pictures/wallpapers/sun.png"
+i3lock -e -i "/home/mario/Media/Pictures/wallpapers/tent.png"
