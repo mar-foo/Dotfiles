@@ -5,8 +5,8 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "Fira Code:pixelsize=12:antialias=true:autohint=true";
-static char *font2[] = { "Font Awesome"};
+static char *font = "UbuntuMono Nerd Font:pixelsize=15:antialias=true:autohint=true";
+static char *font2[] = { "Font Awesome:pixelsize=12"};
 static int borderpx = 0;
 
 /*
@@ -95,119 +95,48 @@ char *termname = "st-256color";
 unsigned int tabspaces = 8;
 
 /* bg opacity*/
-float alpha = 0.8;
+float alpha = 0.7;
 
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
 	/* 8 normal colors */
-	/*"black",*/
-	/*"red3",*/
-	/*"green3",*/
-	/*"yellow3",*/
-	/*"blue2",*/
-	/*"magenta3",*/
-	/*"cyan3",*/
-	/*"gray90",*/
+	"black",
+	"red3",
+	"green3",
+	"yellow3",
+	"blue2",
+	/*"#d62e3f",*/
+	"magenta3",
+	"cyan3",
+	"gray90",
 	/**/
 	/* 8 bright colors */
-	/*"gray50",*/
+	"gray50",
 	/*"red",*/
-	/*"green",*/
-	/*"yellow",*/
+	"blue2",
+	"green",
+	"yellow",
 	/*"blue2",*/
-	/*"magenta",*/
-	/*"cyan",*/
-	/*"white",*/
+	"#d62e3f",
+	"magenta",
+	"cyan",
+	"white",
 
-	/*[255] = 0,*/
+	[255] = 0,
 
-	/* more colors can be added after 255 to use with DefaultXX*/
-	/*"#cccccc",*/
-	/*"#555555",*/
-	/*"black",*/
-	/*DRACULA color scheme*/
-	/* 8 normal colors */
-	[0] = "#000000", /* black   */
-	[1] = "#222222", /* red     */
-	/*[2] = "#50fa7b",*/ /* green   */
-	[2] = "#61e50d", /* green   */
-	/*[3] = "#f1fa8c",*/ /* yellow  */
-	[3] = "#d2df04", /* yellow  */
-	/*[4] = "#bd93f9",*/ /* blue    */
-	[4] = "#900000", /* blue    */
-	[5] = "#ff79c6", /* magenta */
-	/*[6] = "#8be9fd",*/ /* cyan    */
-	[6] = "#2b2b2b", /* cyan    */
-	[7] = "#ffffff", /* white   */
-
-	/* 8 bright colors */
-	[8]  = "#000000", /*black   */
-	[9]  = "#ababab", /*red     */
-	/*[10] = "#50fa7b",*/ /*green   */
-	[10] = "#61e50d", /*green   */
-	/*[11] = "#f1fa8c",*/ /*yellow  */
-	[11] = "#d2df04", /*yellow  */
-	/*[12] = "#bd93f9",*/ /*blue    */
-	[12] = "#ffffff", /*blue    */
-	[13] = "#ff79c6", /*magenta */
-	/*[14] = "#8be9fd",*/ /*cyan    */
-	[14] = "#2b2b2b", /*cyan    */
-	[15] = "#ffffff", /*white   */
-
-	/* special colors */
-	[255] = "#000000", /*background */
-	/*[256] = "#282a36",*/ /*background */
-	[256] = "#01244b",
-	[257] = "#f8f8f2", /*foreground */
-	[258] = "#ffffff",
-	/*SOLARIZED DARK*/
-	/*	"#073642",*/  /*  0: black    */
-	/*	"#dc322f",*/  /*  1: red      */
-	/*	"#859900",*/  /*  2: green    */
-	/*	"#b58900",*/  /*  3: yellow   */
-	/*	"#268bd2",*/  /*  4: blue     */
-	/*	"#d33682",*/  /*  5: magenta  */
-	/*	"#2aa198",*/  /*  6: cyan     */
-	/*	"#eee8d5",*/  /*  7: white    */
-	/* bright */
-	/*	"#002b36",*/  /*  8: brblack  */
-	/*	"#cb4b16",*/  /*  9: brred    */
-	/*	"#586e75",*/  /* 10: brgreen  */
-	/*	"#657b83",*/  /* 11: bryellow */
-	/*	"#839496",*/  /* 12: brblue   */
-	/*	"#6c71c4",*/  /* 13: brmagenta*/
-	/*	"#93a1a1",*/  /* 14: brcyan   */
-	/*	"#fdf6e3",*/  /* 15: brwhite  */
-
+	/* More colors can be added after 255 to use with DefaultXX */
+	"#cccccc",
+	"#555555",
+	"black",
 };
 
 
 
-/*Default colors (colorname index) foreground, background, cursor
-  unsigned int defaultfg = 7;
-  unsigned int defaultbg = 258;
-  static unsigned int defaultcs = 256;
-  static unsigned int defaultrcs =257;*/
-/*DRACULA*/
-unsigned int defaultfg = 257;
-unsigned int defaultbg = 0;
-static unsigned int defaultcs = 258;
-static unsigned int defaultrcs = 258;
-
-/*
- * Colors used, when the specific fg == defaultfg. So in reverse mode this
- * will reverse too. Another logic would only make the simple feature too
- * complex.
- */
-/*unsigned int defaultitalic = 258;
-  unsigned int defaultunderline = 258;
-  */
-/*Solarized
-  unsigned int defaultfg = 12;
-  unsigned int defaultbg = 256;
-  static unsigned int defaultcs = 14;
-  static unsigned int defaultrcs = 15;
-  */
+/*Default colors (colorname index) foreground, background, cursor*/
+unsigned int defaultfg = 7;
+unsigned int defaultbg = 258;
+static unsigned int defaultcs = 256;
+static unsigned int defaultrcs =257;
 /*
  * Default shape of cursor
  * 2: Block ("█")

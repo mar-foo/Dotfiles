@@ -8,14 +8,14 @@
 
 defcmd="fzf"
 #guicmd="rofi -dmenu -i" #uncomment next line for dmenu
-guicmd="dmenu -i -l 15"
+guicmd="dmenu -x 768 -y 5.4 -z 384 -i -l 15"
 promptcmd="$defcmd"
 if [ -z "$*" ]; then
-	echo -n "Search: "
+	echo -n "Youtube: "
 	read -r query
 else
 	case "$1" in
-		-r) query=$(echo | $guicmd -p "Search: ")
+		-r) query=$(echo | $guicmd -p "Youtube: ")
 			promptcmd="$guicmd -p Video:";;
 		*) query="$*";;
 	esac

@@ -6,7 +6,6 @@
 [[ $- != *i* ]] && return
 
 ##ALIASES##
-alias abook='gpg -d /home/mario/.abook/addressbook.gpg > /home/mario/.abook/addressbook && abook'
 alias f='fzf -e --height=10% --layout=reverse'
 alias fwh='echo "Changing firewall zone to home..." ; sudo firewall-cmd --change-interface=wlp2s0 --zone=home'
 alias fwp='echo "Changing firewall zone to public..." ; sudo firewall-cmd --change-interface=wlps20 --zone=public'
@@ -18,35 +17,29 @@ alias la='lsd -a --group-dirs=first --color=always'
 alias lla='lsd -la --group-dirs=first --color=always'
 alias mocp='mocp --config /home/mario/.moc/.config'
 alias neomutt='mw -Y && neomutt'
-alias p='sudo pacman'
 alias pvpn='sudo protonvpn'
 alias :q='exit'
-alias smci='sudo make clean install'
 alias sxiv='devour sxiv'
-alias vim='nvim'
+alias vim='vim'
 alias v='vifmrun ~/Documents/University ~'
 alias yt='/usr/local/bin/youtube-dl -x -f bestaudio'
 
 #Path
 export PATH="$HOME/.local/bin/scripts:$PATH"
-export PATH="$HOME/.cargo/bin:$PATH"
-export PATH="$HOME/.local/bin/icecat:$PATH"
 
-EDITOR=$"nvim"
-VISUAL=$"nvim"
+EDITOR=$"vim"
+VISUAL=$"vim"
 TERMINAL=$"st"
+
 #Autostart
-neofetch
-#cowsay -f gnu "I'd just like to interject for a moment. What you are referring to as Linux, is in fact, GNU/Linux, or as I've recently taken to calling it, GNU plus Linux"
-#unix
+#neofetch
+unix
 
 ##PROMPT##
-export PS1=" \W ∫ "
+#export PS1=" \[\033[01;34m\] \W ∫\[\033[00m\] "
+export PS1="\[\033[01;34m\] [\A] [\W] \n \$\[\033[00m\] "
 #Vi mode
 set -o vi
 
 #Fzf
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
-##USE ROOT##
-source ~/root/bin/thisroot.sh

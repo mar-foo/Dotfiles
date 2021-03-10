@@ -1,1 +1,0 @@
-yacy_search_server/startYACY.sh

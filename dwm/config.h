@@ -1,14 +1,14 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 1;        /* border pixel of windows */
-static const Gap default_gap        = {.isgap = 1, .realgap = 10, .gappx = 10};
+static const unsigned int borderpx  = 3;        /* border pixel of windows */
+static const Gap default_gap        = {.isgap = 1, .realgap = 15, .gappx = 15};
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "Fira Code:size=8", "Font Awesome" };
-static const char dmenufont[]       = "monospace:size=8";
-static const char col_gray1[]       = "#333333";
+static const char *fonts[]          = { "UbuntuMono Nerd:size=10" };
+static const char dmenufont[]       = "UbuntuMono Nerd:size=10";
+static const char col_gray1[]       = "#000000";
 static const char col_gray2[]       = "#1e1e1e";
 static const char col_gray3[]       = "#ffffff";
 static const char col_gray4[]       = "#000000";
@@ -20,7 +20,8 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "", "", "", "", "", "", "", "", "", };
+//static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+static const char *tags[] = { "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -28,32 +29,26 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     switchtotag    isfloating   monitor */
-	{ "Gimp",        NULL,       NULL,                                     1<<6,              1,	      0,           -1 },
-	{ "qutebrowser", NULL,	     NULL,	                               1<<2,		  1,          0,	   -1 },
-	{ "Abrowser",    NULL,	     NULL,	                               1<<2,	 	  1,	      0,	   -1 },
+	{ "Firefox",    NULL,	     NULL,	                               1<<2,	 	  1,	      0,	   -1 },
 	{ "Tor Browser", NULL,       NULL,                                     1<<2,              1,          0,           -1 },
-	{ "IceCat",      NULL,       NULL,                                     1<<2,              1,          0,           -1 },
-	{ NULL,	         NULL,       "mocp",      			       1<<4,              1,          0,           -1 },
+	{ NULL,	         NULL,       "mocp",      			       1<<7,              1,          0,           -1 },
 	{ NULL,	         NULL,       "vifm",                                   1<<1,		  1,          0,	   -1 },
 	{ "mpv",	 NULL,	     NULL,				       1<<8,		  1,	      0,	   -1 },
-	{ "Zathura",	 NULL,	     NULL,				       1<<3,		  1,	      0,	   -1 },
-	{ NULL,		 NULL,       "calcurse",               	               1<<7,              1,	      0,           -1 },
-	{ NULL,		 NULL,	     "neomutt",				       1<<5,		  1,	      0,	   -1 },
-	{ "qTox",	 NULL,	     NULL,				       1<<5,	          1,          0,           -1 },
-	{ NULL,		 NULL,	     "newsboat",			       1<<5,		  1,	      0,	   -1 },
+	{ NULL,		 NULL,       "calcurse",               	               1<<6,              1,	      0,           -1 },
+	{ NULL,		 NULL,	     "neomutt",				       1<<4,		  1,	      0,	   -1 },
+	{ NULL,		 NULL,	     "newsboat",			       1<<3,		  1,	      0,	   -1 },
 };
 
 /* layout(s) */
-static const float mfact     = 0.50; /* factor of master area size [0.05..0.95] */
+static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
-static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
+static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
 	{ "[]=",      tile },    /* first entry is default */
 	{ "><>",      NULL },    /* no layout function means floating behavior */
 	{ "[M]",      monocle },
-	{ "[D]",      deck },
 };
 
 /* key definitions */
@@ -71,95 +66,27 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
-static const char scratchpadname[] = "scratchpad";
-static const char *scratch[]  = { "st", "-t", scratchpadname, "-g", "120x34", NULL };
-static const char *helpcmd[]  = { "/home/mario/Github/suckless/dwm/keybinds/keybinds.sh", NULL };
-//My bindings
-//System
-static const char *shutcmd []  = { "/home/mario/.local/bin/scripts/shtdwn.sh", NULL };
-static const char *lockcmd []  = { "/home/mario/.local/bin/scripts/lock", NULL };
-//Shortcuts
-static const char *webcmd  []  = { "torbrowser-launcher", NULL };
-static const char *bookcmd []  = { "/home/mario/.local/bin/scripts/bookmarks.sh", NULL };
-static const char *vifmcmd []  = { "st", "vifm", "/home/mario/Documents/University", "/home/mario", NULL };
-static const char *confcmd []  = { "/home/mario/.local/bin/scripts/config_files.sh", NULL};
-static const char *emacscmd[]  = { "emacs", NULL};
-static const char *otticmd []  = { "/home/mario/.local/bin/scripts/Lab_ottica.sh", NULL};
-static const char *editcmd []  = { "st", "nvim", NULL };
-static const char *calendar[]  = { "/home/mario/.local/bin/scripts/calendar.sh", NULL };
-static const char *mailcmd []  = { "/home/mario/.local/bin/scripts/mail.sh", NULL };
-static const char *workcmd []  = { "/home/mario/.local/bin/scripts/work.sh", NULL };
-static const char *toxcmd  []  = { "/home/mario/Github/qTox/qtox", NULL};
-static const char *newscmd []  = { "st", "-e", "newsboat", "-r", NULL };
-//Music
-static const char *musicmd []  = { "/home/mario/.local/bin/scripts/play.sh" , NULL };
-static const char *pausecmd[]  = { "/home/mario/.local/bin/scripts/pause.sh", NULL};
-static const char *stopcmd []  = { "/home/mario/.local/bin/scripts/stop.sh", NULL };
-static const char *nextcmd []  = { "mocp", "-f", NULL };
-static const char *prevcmd []  = { "mocp", "-r", NULL };
-//Volume
-static const char *volcmd  []  = { "st", "alsamixer", NULL};
-static const char *pluscmd []  = { "amixer", "sset", "Master", "5%+", NULL };
-static const char *minuscmd[]  = { "amixer", "sset", "Master", "5%-", NULL };
-static const char *mutecmd []  = { "amixer", "sset", "Master", "0%" , NULL };
-
-
-
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
-	//My own bindings:
-	//System
-	{ MODKEY,		  	XK_BackSpace, spawn,	   {.v = shutcmd } },
-	{ MODKEY|ShiftMask,		XK_BackSpace, spawn,	   {.v = lockcmd } },
-	//Shortcuts
-	{ MODKEY,			XK_s,      spawn,	   {.v = webcmd  } },
-	{ MODKEY,			XK_z,	   spawn,	   {.v = bookcmd } },
-	{ MODKEY,        		XK_f,      spawn,	   {.v = vifmcmd } },
-	{ MODKEY,			XK_c,	   spawn,	   {.v = confcmd } },
-	{ MODKEY,			XK_o,	   spawn,	   {.v = otticmd } },
-	{ MODKEY,			XK_v,	   spawn,	   {.v = editcmd } },
-	{ MODKEY,			XK_a,	   spawn,	   {.v = calendar} },
-	{ MODKEY,			XK_g,	   spawn,	   {.v = mailcmd } },
-	{ MODKEY|ShiftMask,		XK_semicolon, spawn,	   {.v = workcmd } },
-	{ MODKEY,			XK_t,	   spawn,	   {.v = toxcmd  } },
-	{ MODKEY,			XK_y,	   spawn,	   {.v = newscmd } },
-	//Music and volume
-	{ MODKEY,	 	        XK_slash, spawn,	   {.v = musicmd } },
-	{ MODKEY,			XK_p,	   spawn, 	   {.v = pausecmd} },
-	{ MODKEY|ShiftMask,		XK_p,	   spawn,	   {.v = stopcmd } },
-	{ MODKEY,			XK_n,	   spawn, 	   {.v = nextcmd } },
-	{ MODKEY,			XK_b,	   spawn,	   {.v = prevcmd } },
-	//Volume
-	{ MODKEY|ShiftMask,		XK_v,	   spawn,	   {.v = volcmd  } },
-	{ MODKEY|ShiftMask,		XK_equal,  spawn,	   {.v = pluscmd } },
-	{ MODKEY,			XK_minus,  spawn,	   {.v = minuscmd} },
-	{ MODKEY,			XK_m,	   spawn,	   {.v = mutecmd } },
-	//
-	{ MODKEY,                       XK_semicolon, spawn,       {.v = dmenucmd } },
-	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY,  	 		XK_space,  togglescratch,  {.v = scratch } },
-	{ MODKEY|ShiftMask,		XK_slash,  spawn,	   {.v = helpcmd } },
+	{ MODKEY,			XK_semicolon, spawn,	   {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_b,      togglebar,      {0} },
 	{ MODKEY|ShiftMask,             XK_j,      rotatestack,    {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_k,      rotatestack,    {.i = -1 } },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_i,      incnmaster,     {.i = -1 } },
+	{ MODKEY|ShiftMask,             XK_d,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
-	{ MODKEY,                       XK_x,      transfer,       {0} },
-	{ MODKEY|ShiftMask,             XK_Return, zoom,           {0} },
+	{ MODKEY,                       XK_space,  zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
-	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
 	{ MODKEY,			XK_d,	   killclient,     {0} },
 	{ MODKEY,                       XK_w,      setlayout,      {.v = &layouts[0]} },
-	{ MODKEY,                       XK_q,      setlayout,      {.v = &layouts[1]} },
+	{ MODKEY|ShiftMask,             XK_space,  setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_e,      setlayout,      {.v = &layouts[2]} },
-	{ MODKEY,                       XK_r,      setlayout,      {.v = &layouts[3]} },
 	//{ MODKEY,                       XK_space,  setlayout,      {0} },
-	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
+	{ MODKEY,                       XK_q,      togglefloating, {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
 	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
@@ -180,7 +107,7 @@ static Key keys[] = {
 		TAGKEYS(                        XK_8,                      7)
 		TAGKEYS(                        XK_9,                      8)
 		{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
-		{ MODKEY|ControlMask|ShiftMask, XK_q,      quit,           {1} },
+		{ MODKEY|ShiftMask,             XK_r,      quit,           {1} },
 };
 
 /* button definitions */

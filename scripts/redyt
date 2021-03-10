@@ -2,7 +2,7 @@
 
 if [ -z $1 ]; then
   echo -n "Search query: ";
-  subreddit=$(cat ~/.config/redyt/subreddit.txt | dmenu -p "Select Subreddit r/" -i -l 10 | cut -d\| -f1 | awk '{$1=$1;print}')
+  subreddit=$(cat ~/.config/redyt/subreddit.txt | dmenu -x 768 -y 5.4 -z 384 -p "Select Subreddit r/" -i -l 10 | cut -d\| -f1 | awk '{$1=$1;print}')
   if [ "$subreddit" == "" ]; then exit; fi
 else
   subreddit=$1
