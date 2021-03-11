@@ -19,10 +19,12 @@ super + shift + f
 	pcmanfm
 
 #Youtube
-super + s; {g,j,u,a,s,space}
-	$HOME/.local/bin/scripts/bookmarks.sh {GentooWiki,Jitsi,Unimia,Ariel,Searx,Url}
+super + s; {g,j,u,a,s,w,space}
+	$HOME/.local/bin/scripts/bookmarks.sh {GentooWiki,Jitsi,Unimia,Ariel,Searx,Website,Url}
 super + s; y
 	$HOME/.local/bin/scripts/myyt -r
+super + s; m
+	$HOME/.local/bin/scripts/modify-script.sh
 
 #Newsboat
 super + y
@@ -43,8 +45,10 @@ super + r
 #Volume
 super + minus
 	amixer sset Master 5%-
+	#$HOME/.local/bin/scripts/pavolume --down
 super + plus
 	amixer sset Master 5%+
+	#$HOME/.local/bin/scripts/pavolume --up
 super + m
 	pavucontrol
 super + shift + m
@@ -65,3 +69,11 @@ super + n
 #Lockscreen
 super + shift + BackSpace
 	$HOME/.local/bin/scripts/lock
+
+#Webcam
+super + shift + w
+	$HOME/.local/bin/scripts/webcam.sh
+
+#Keyboard (it, gb)
+super + control + k
+	$HOME/.local/bin/scripts/keyboard.sh

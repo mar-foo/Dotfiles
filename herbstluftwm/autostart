@@ -17,9 +17,9 @@ hc keyunbind --all
 
 #Autostart
 TERMINAL="st"
-nitrogen --restore
+hsetroot -cover $HOME/.config/wall.jpg
 dunst &
-picom --experimental-backend &
+picom &
 calcurse --daemon
 
 
@@ -33,6 +33,7 @@ Newsboat_TAG=""
 Tox_TAG=""
 Calcurse_TAG=""
 Mpv_TAG=""
+Scratch_TAG=""
 # keybindings
 # if you have a super key you will be much happier with Mod set to Mod4
 #Mod=Mod1    # Use alt as the main modifier
@@ -91,7 +92,7 @@ hc keybind $Mod-Mod1-s spawn ~/.config/herbstluftwm/sticky.sh stick
 
 # tags
 #tag_names=( {1..9} )
-tag_names=( "" "" "" "" "" "" "" "" "" "")
+tag_names=( "" "" "" "" "" "" "" "" "" "")
 tag_keys=( {1..9} 0 )
 
 hc rename default "${tag_names[0]}" || true
@@ -144,7 +145,6 @@ hc keybind $Mod-c spawn ~/.config/herbstluftwm/calculator.sh
 hc keybind $Mod-d close_or_remove
 hc keybind $Mod-f chain , use $Vifm_TAG , spawn st -e vifm $HOME/Documents/University $HOME
 hc keybind $Mod-g chain , use $Neomutt_TAG , spawn /home/mario/.local/bin/scripts/mail.sh
-hc keybind $Mod-m spawn ~/.config/herbstluftwm/music.sh
 hc keybind $Mod-r spawn ~/.local/bin/scripts/redyt
 hc keybind $Mod-s spawn $HOME/.local/bin/scripts/tor.sh
 hc keybind $Mod-t chain , use $Tox_TAG , spawn qtox
@@ -154,13 +154,14 @@ hc keybind $Mod-x chain , use $Mpv_TAG , spawn devour ~/.local/bin/scripts/myyt 
 hc keybind $Mod-y chain , use $Newsboat_TAG , spawn st -e newsboat
 hc keybind $Mod-z spawn st -e bpytop
 hc keybind $Mod-BackSpace spawn $HOME/.local/bin/scripts/shtdwn.sh
-hc keybind $Mod-bracketleft spawn abrowser
+hc keybind $Mod-bracketleft spawn firefox
 hc keybind $Mod-bracketright chain , use $Tox_TAG , spawn session-desktop-linux-x86_64-1.4.4.AppImage
-hc keybind $Mod-semicolon spawn dmenu_run
+hc keybind $Mod-semicolon spawn dmenu_run -x 768 -y 5.4 -z 384 -l 10
 hc keybind $Mod-space spawn ~/.config/herbstluftwm/scratchpad.sh
 
 hc keybind $Mod-Shift-a spawn $HOME/.local/bin/scripts/appointment.sh
 hc keybind $Mod-Shift-c close_and_remove
+hc keybind $Mod-Shift-f chain , use $Vifm_TAG , spawn pcmanfm
 hc keybind $Mod-Shift-x spawn ~/.local/bin/scripts/consoom -r
 hc keybind $Mod-Control-x spawn ~/.local/bin/scripts/consoom2.0 -r
 hc keybind $Mod-Shift-BackSpace spawn $HOME/.local/bin/scripts/lock
@@ -168,6 +169,7 @@ hc keybind $Mod-Shift-semicolon spawn $HOME/.local/bin/scripts/work.sh
 hc keybind $Mod-Shift-space spawn ~/.config/herbstluftwm/messaging.sh
 
 hc keybind $Mod-Control-v spawn ~/.config/herbstluftwm/po.sh
+hc keybind $Mod-Control-m spawn ~/.config/herbstluftwm/music.sh
 
 #Music
 hc keybind $Mod-b spawn mocp -r
@@ -178,7 +180,7 @@ hc keybind $Mod-slash chain , use $Mocp_TAG , spawn ~/.local/bin/scripts/play.sh
 
 hc keybind $Mod-Shift-equal spawn amixer sset Master 5%+
 hc keybind $Mod-Shift-p spawn $HOME/.local/bin/scripts/stop.sh
-hc keybind $Mod-Control-m spawn pavucontrol
+hc keybind $Mod-m spawn pavucontrol
 
 #Rotation
 hc keyunbind $Mod-Right
@@ -232,11 +234,14 @@ hc rule windowtype~'_NET_WM_WINDOW_TYPE_(DIALOG|UTILITY|SPLASH)' pseudotile=on
 hc rule windowtype='_NET_WM_WINDOW_TYPE_DIALOG' focus=on
 hc rule windowtype~'_NET_WM_WINDOW_TYPE_(NOTIFICATION|DOCK|DESKTOP)' manage=off
 hc rule class='Gcr-prompter' pseudotile=on
-hc rule class='Abrowser' tag=$Tor_TAG switchtag=on focus=on
+hc rule class='Firefox' tag=$Tor_TAG switchtag=on focus=on
 hc rule class='Tor Browser' tag=$Tor_TAG
-hc rule wintitle='mocp' tag=$Mocp_TAG focus=on switchtotag=on
-hc rule class='mpv' tag=$Mpv_TAG focus=on switchtotag=on
-hc rule class='qTox' tag=$Tox_TAG focus=on switchontag=on
+hc rule wintitle='mocp' tag=$Mocp_TAG focus=on switchtag=on
+hc rule class='mpv' tag=$Mpv_TAG focus=on switchtag=on
+hc rule class='qTox' tag=$Tox_TAG focus=on switchtag=on
+hc rule class='Pavucontrol' tag=$Scratch_TAG focus=on switchtag=on
+
+hc rule class="zoom" tag=$Mpv_TAG focus=on switchtag=on
 
 
 # unlock, just to be sure
@@ -263,6 +268,7 @@ panel=~/.config/herbstluftwm/panel.sh
 [ -x "$panel" ] || panel=/etc/xdg/herbstluftwm/panel.sh
 for monitor in $(herbstclient list_monitors | cut -d: -f1) ; do
     # start it on each monitor
+    hc pad $monitor 20 0 0
     "$panel" $monitor &
 done
 #$HOME/.local/bin/bar.sh | lemonbar &

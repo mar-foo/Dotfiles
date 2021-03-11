@@ -22,9 +22,9 @@ height=${mrect[3]}
 
 rect=(
     $((width/3))
-    $((height/2))
-    $((${mrect[0]}+3*(width/5)))
-    $((${mrect[1]}+(height/2)))
+    $((height/3))
+    $((${mrect[0]}+13*(width/20)))
+    $((${mrect[1]}+2*(height/3)))
 )
 
 hc add "$tag"
