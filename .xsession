@@ -34,22 +34,11 @@ if [ -f "$userresources" ]; then
 
 fi
 
+setxkbmap gb
 if [ -f "$usermodmap" ]; then
     xmodmap "$usermodmap"
 fi
 
 #Caps lock is escape when pressed, super when held down
+killall xcape
 xcape -e 'Super_L=Escape'
-
-#Put monitor on the left
-screen=$(xrandr | grep VGA-1 | sed "s/ /;/g" | awk -F';' '{print $2}')
-case $screen in
-	"connected") resolution=$(xrandr | grep VGA-1 | sed 's/ /;/g' | awk -F';' '{print $3}' | sed 's/\+.*$//g')
-		case $resolution in
-			1920x1200) xrandr --output VGA-1 --left-of LVDS-1;;
-			1280x1024) xrandr --output VGA-1 --above LVDS-1;;
-			*);;
-		esac;;
-	*);;
-esac
-
