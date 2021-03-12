@@ -19,8 +19,8 @@ super + shift + f
 	pcmanfm
 
 #Youtube
-super + s; {g,j,u,a,s,w,space}
-	$HOME/.local/bin/scripts/bookmarks.sh {GentooWiki,Jitsi,Unimia,Ariel,Searx,Website,Url}
+super + s; {g,j,u,a,s,w,p,space}
+	$HOME/.local/bin/scripts/bookmarks.sh {GentooWiki,Jitsi,Unimia,Ariel,Surf,Website,Protonmail,Url}
 super + s; y
 	$HOME/.local/bin/scripts/myyt -r
 super + s; m

@@ -20,7 +20,6 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-//static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 static const char *tags[] = { "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", };
 
 static const Rule rules[] = {
@@ -28,18 +27,19 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class      instance    title       tags mask     switchtotag    isfloating   monitor */
-	{ "Firefox",    NULL,	     NULL,	                               1<<2,	 	  1,	      0,	   -1 },
-	{ "Tor Browser", NULL,       NULL,                                     1<<2,              1,          0,           -1 },
-	{ NULL,	         NULL,       "mocp",      			       1<<7,              1,          0,           -1 },
-	{ NULL,	         NULL,       "vifm",                                   1<<1,		  1,          0,	   -1 },
-	{ "mpv",	 NULL,	     NULL,				       1<<8,		  1,	      0,	   -1 },
-	{ NULL,		 NULL,       "calcurse",               	               1<<6,              1,	      0,           -1 },
-	{ NULL,		 NULL,	     "neomutt",				       1<<4,		  1,	      0,	   -1 },
-	{ NULL,		 NULL,	     "newsboat",			       1<<3,		  1,	      0,	   -1 },
-	{ "Signal",	NULL,	     NULL,				       1<<5,		  1,	      0,	   -1 },
-	{ "TelegramDesktop",   NULL, NULL,				       1<<5,		  1,	      0,	   -1 },
-	{ NULL,          NULL,       "pulsemixer",                             1<<8,              0,          1,           -1 },
+	/* class               instance    title      tags mask  switchtotag  isfloating monitor */
+	/*{ "tabbed",            NULL,	   NULL,	   1<<2,    1,            0,        -1 },*/
+	{ "Firefox",           NULL,	   NULL,	   1<<2,    1,            0,        -1 },
+	{ "Tor Browser",       NULL,       NULL,           1<<2,    1,            0,        -1 },
+	{ NULL,	               NULL,       "mocp",         1<<7,    1,            0,        -1 },
+	{ NULL,	               NULL,       "vifm",         1<<1,    1,            0,        -1 },
+	{ "mpv",	       NULL,	   NULL,	   1<<8,    1,            0,        -1 },
+	{ NULL,		       NULL,       "calcurse",     1<<6,    1,            0,        -1 },
+	{ NULL,		       NULL,	   "neomutt",	   1<<4,    1,            0,        -1 },
+	{ NULL,		       NULL,	   "newsboat",     1<<3,    1,            0,        -1 },
+	{ "Signal",	       NULL,	   NULL,	   1<<5,    1,            0,        -1 },
+	{ "TelegramDesktop",   NULL,       NULL,	   1<<5,    1,            0,        -1 },
+	{ NULL,                NULL,       "pulsemixer",   NULL,    0,            1,        -1 },
 
 };
 
@@ -50,8 +50,8 @@ static const int resizehints = 1;    /* 1 means respect size hints in tiled resi
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "[]=",      tile },    /* first entry is default */
-	{ "><>",      NULL },    /* no layout function means floating behavior */
+	{ "tile",      tile },    /* first entry is default */
+	{ "float",      NULL },    /* no layout function means floating behavior */
 	{ "[M]",      monocle },
 };
 
