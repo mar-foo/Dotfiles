@@ -28,7 +28,7 @@ static Parameter defconfig[ParameterLast] = {
 	[AccessWebcam]        =       { { .i = 1 },     },
 	[Certificate]         =       { { .i = 0 },     },
 	[CaretBrowsing]       =       { { .i = 0 },     },
-	[CookiePolicies]      =       { { .v = "a" },   }, /* @ accept no third party, A accept all, a accept none */
+	[CookiePolicies]      =       { { .v = "a@" },   }, /* @ accept no third party, A accept all, a accept none */
 	[DefaultCharset]      =       { { .v = "UTF-8" }, },
 	[DiskCache]           =       { { .i = 1 },     },
 	[DNSPrefetch]         =       { { .i = 0 },     },
@@ -68,9 +68,13 @@ static UriParameters uriparams[] = {
 					       [JavaScript] = { { .i = 1 }, 1 },
 					       [CookiePolicies] = { { .v = "@a" }, 1 },
 				       }, },
-	{ "(://|\\.)marioforzanini\\.com(/|$)" , {
-							 [Style] = { {.i = 0 }, },
-						 }, },
+	{ "(://|\\.)protonmail\\.com(/|$)", {
+						    [CookiePolicies] = { { .v = "@" }, 2 },
+						    [JavaScript] = { { .i = 1}, 1 },
+					    }, },
+	{ "(://|\\.)vultr\\.com(/|$)" , {
+						[CookiePolicies] = { { .v = "A" }, 2},
+					},},
 };
 
 /* default window size: width, height */
