@@ -1,0 +1,75 @@
+#Terminal
+super + Return
+	st
+
+#Firefox
+super + bracketleft
+	firefox
+
+#Chat
+super + bracketright; {s,t}
+	{signal-desktop,telegram-desktop}
+
+#Vifm
+super + f
+	st -e vifm ~ ~/Documents/University
+
+#Pcmanfm
+super + shift + f
+	pcmanfm
+
+#Youtube
+super + s; {g,j,u,a,s,w,p,space}
+	$HOME/.local/bin/scripts/bookmarks.sh {GentooWiki,Jitsi,Unimia,Ariel,Surf,Website,Protonmail,Url}
+super + s; y
+	$HOME/.local/bin/scripts/myyt -r
+super + s; m
+	$HOME/.local/bin/scripts/modify-script.sh
+
+#Newsboat
+super + y
+	st -e newsboat
+
+#Mail
+super + g
+	$HOME/.local/bin/scripts/mail.sh
+
+#Calendar
+super + a
+	st -e calcurse
+
+#Reddit
+super + r
+	$HOME/.local/bin/scripts/redyt
+
+#Passmenu
+super + shift + p
+	$HOME/.local/bin/scripts/passmenu2
+
+#Volume
+super + minus
+	#amixer sset Master 5%-
+	$HOME/.local/bin/scripts/pavolume --down
+super + plus
+	#amixer sset Master 5%+
+	$HOME/.local/bin/scripts/pavolume --up
+super + m
+	pavucontrol
+super + shift + m
+	st -e pulsemixer
+
+#Music
+super + p
+	$HOME/.local/bin/scripts/pause.sh
+super + shift + p
+	$HOME/.local/bin/scripts/stop.sh
+super + slash
+	$HOME/.local/bin/scripts/play.sh
+super + b
+	mocp -r
+super + n
+	mocp -f
+
+#Lockscreen
+super + shift + BackSpace
+	$HOME/.local/bin/scripts/lock

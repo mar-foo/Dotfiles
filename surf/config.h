@@ -8,12 +8,22 @@ static char *cachedir       = "~/.surf/cache/";
 static char *cookiefile     = "~/.surf/cookies.txt";
 static SearchEngine searchengines[] = {
 	{ "d",    "https://www.duckduckgo.com/html?q=%s"   },
+	{ "s",    "https://www.searx.bar/search?q=%s"      },
 };
 static char **plugindirs    = (char*[]){
 	"~/.surf/plugins/",
 		LIBPREFIX "/mozilla/plugins/",
 		NULL
 };
+static char *linkselect_curwin [] = { "/bin/sh", "-c",
+	"$HOME/.local/bin/scripts/surf_linkselect.sh $0 'Link' | xargs -r xprop -id $0 -f _SURF_GO 8s -set _SURF_GO",
+	winid, NULL
+};
+static char *linkselect_newwin [] = { "/bin/sh", "-c",
+	"$HOME/.local/bin/scripts/surf_linkselect.sh $0 'Link (new window)' | xargs -r surf",
+	winid, NULL
+};
+static char *editscreen[] = { "/bin/sh", "-c", "$HOME/.local/bin/scripts/edit_screen.sh", NULL};
 
 /* Webkit default features */
 /* Highest priority value will be used.
@@ -40,11 +50,11 @@ static Parameter defconfig[ParameterLast] = {
 	[HideBackground]      =       { { .i = 0 },     },
 	[Inspector]           =       { { .i = 0 },     },
 	[Java]                =       { { .i = 1 },     },
-	[JavaScript]          =       { { .i = 0 },     1 },
+	[JavaScript]          =       { { .i = 0 },     0 },
 	[KioskMode]           =       { { .i = 0 },     },
 	[LoadImages]          =       { { .i = 0 },     },
 	[MediaManualPlay]     =       { { .i = 1 },     },
-	[Plugins]             =       { { .i = 1 },     },
+	[Plugins]             =       { { .i = 0 },     },
 	[PreferredLanguages]  =       { { .v = (char *[]){ "en_US", NULL } }, },
 	[RunInFullscreen]     =       { { .i = 0 },     },
 	[ScrollBars]          =       { { .i = 0 },     },
@@ -64,10 +74,6 @@ static UriParameters uriparams[] = {
 						  [JavaScript] = { { .i = 0 }, 1 },
 						  [Plugins]    = { { .i = 0 }, 1 },
 					  }, },
-	{ "(://|\\.)ariel\\.it(/|$)" , {
-					       [JavaScript] = { { .i = 1 }, 1 },
-					       [CookiePolicies] = { { .v = "@a" }, 1 },
-				       }, },
 	{ "(://|\\.)protonmail\\.com(/|$)", {
 						    [CookiePolicies] = { { .v = "@" }, 2 },
 						    [JavaScript] = { { .i = 1}, 1 },
@@ -169,6 +175,11 @@ static Key keys[] = {
 	{ 0,                     GDK_KEY_slash,  spawn,      SETPROP("_SURF_FIND", "_SURF_FIND", PROMPT_FIND) },
 	{ 0,                     GDK_KEY_w,      playexternal, { 0 } },
 
+
+	{ 0,                     GDK_KEY_d,      externalpipe, { .v = linkselect_curwin } },
+	{ GDK_SHIFT_MASK,        GDK_KEY_d,      externalpipe, { .v = linkselect_newwin } },
+	{ 0,                     GDK_KEY_o,      externalpipe, { .v = editscreen        } },
+
 	{ 0,                     GDK_KEY_i,      insert,     { .i = 1 } },
 	{ 0,                     GDK_KEY_Escape, insert,     { .i = 0 } },
 
@@ -208,6 +219,10 @@ static Key keys[] = {
 	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_a,      togglecookiepolicy, { 0 } },
 	{ 0,                     GDK_KEY_F11,    togglefullscreen, { 0 } },
 	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_o,      toggleinspector, { 0 } },
+
+	{ MODKEY,                     GDK_KEY_d,      externalpipe, { .v = linkselect_curwin } },
+	{ GDK_SHIFT_MASK|MODKEY,      GDK_KEY_d,      externalpipe, { .v = linkselect_newwin } },
+	{ MODKEY,                     GDK_KEY_o,      externalpipe, { .v = editscreen        } },
 
 	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_c,      toggle,     { .i = CaretBrowsing } },
 	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_f,      toggle,     { .i = FrameFlattening } },
