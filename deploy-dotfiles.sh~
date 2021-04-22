@@ -1,0 +1,78 @@
+#!/bin/sh
+# Author: Mario Forzanini https://marioforzanini.com
+# Script used to deploy my dotfiles with GNU Stow
+# Dependencies: GNU Stow
+# If you want to deploy dwm.desktop and startdwm scripts where I chose to put them you will need root privileges
+
+# Where to find dotfiles
+DOTFILES_DIR="~/Dotfiles"
+
+
+# Deploy suckless software in $SUCKLESS_DIR/Github/suckless
+SUCKLESS_DIR="~"
+suckless() {
+    suck_sw=(
+	dmenu
+	dmenu1
+	dwm
+	dwm1
+	slock
+	st
+	surf
+	tabbed
+    )
+    for x in @{suck_sw}; do
+	stow -t ~ $DOTFILES_DIR/$x
+	echo "Deploying $x in $SUCKLESS_DIR/Github/suckless"
+	done 
+}
+
+# Deploy configs in ~/.config
+config() {
+    configs=(
+	bspwm
+	calcurse
+	herbsluftwm
+	htop
+	msmtp
+	mutt
+	newsboat
+	openbox
+	polybar
+	sxhkd
+	vifm
+    )
+    dotfiles=(
+	.vimrc
+	.bashrc
+	.zshrc
+    )
+
+    for x in @{configs}; do
+	test -z $DOTFILES_DIR/$x || continue
+	stow -t ~ $DOTFILES_DIR/$x
+	echo "Deploying $x configuration files to ~/.config"
+	done
+    for x in @{dotfiles}; do
+	test -z $DOTFILES_DIR/$x || continue
+	stow -t ~ $DOTFILES_DIR/$x
+	echo "Deploying $x in ~"
+	done
+}
+
+# Deploy wallpapers in ~/Media/Pictures/wallpapers
+wallpaper() {
+    stow -t ~ $DOTFILES_DIR/wallpapers
+}
+
+# Deploy files needed to setup a dwm session in the display manager
+dwm() {
+    sudo stow -t / $DOTFILES_DIR/xsessions
+    sudo stow -t / $DOTFILES_DIR/startdwm
+    echo "Deploying dwm.desktop and startdwm to /usr/share/xsessions/dwm.desktop and /usr/bin/startdwm\nnow dwm should appear in the display manager"
+}
+
+all() {
+    $(suckless)
+    
+}

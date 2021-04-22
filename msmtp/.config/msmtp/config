@@ -1,0 +1,11 @@
+account mario.forzanini@studenti.unimi.it
+host smtp.unimi.it
+port 465
+from mario.forzanini@studenti.unimi.it
+user mario.forzanini@studenti.unimi.it
+passwordeval "pass mario.forzanini@studenti.unimi.it"
+auth on
+tls on
+tls_starttls off
+tls_trust_file	/etc/ssl/certs/ca-certificates.crt
+logfile /home/mario/.config/msmtp/msmtp.log

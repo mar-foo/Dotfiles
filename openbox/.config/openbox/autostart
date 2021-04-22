@@ -1,0 +1,6 @@
+#!/bin/sh
+source $HOME/.xsession
+picom -i 0.6 &
+hsetroot -cover ~/.config/wall.jpg &
+~/.config/openbox/panel.sh &
+killall sxhkd ; sxhkd -c ~/.config/openbox/sxhkdrc &
