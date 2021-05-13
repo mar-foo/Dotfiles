@@ -5,7 +5,7 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "UbuntuMono Nerd Font:pixelsize=15:antialias=true:autohint=true";
+static char *font = "JetBrains Mono:pixelsize=12:antialias=true:autohint=true";
 static char *font2[] = { "Font Awesome:pixelsize=12"};
 static int borderpx = 0;
 
@@ -17,7 +17,7 @@ static int borderpx = 0;
  * 4: value of shell in /etc/passwd
  * 5: value of shell in config.h
  */
-static char *shell = "/bin/bash";
+static char *shell = "/bin/sh";
 char *utmp = NULL;
 /* scroll program: to enable use a string like "scroll" */
 char *scroll = NULL;

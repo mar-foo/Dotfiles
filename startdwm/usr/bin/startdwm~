@@ -2,7 +2,7 @@
 
 picom &
 xmodmap /home/mario/.Xmodmap
-wal -R &
+/home/mario/.local/bin/wal -R &
 
 #Put monitor on the left
 screen=$(xrandr | grep HDMI-A-0 | sed "s/ /;/g" | awk -F';' '{print $2}')

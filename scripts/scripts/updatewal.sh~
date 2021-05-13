@@ -1,0 +1,6 @@
+cd ~/Github/suckless/dwm1/
+doas make clean install
+cd ~/Github/suckless/dmenu1/
+doas make clean install
+cd ~/Github/suckless/st
+doas make clean install

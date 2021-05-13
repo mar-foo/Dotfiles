@@ -10,17 +10,21 @@ super + bracketleft
 super + bracketright; {s,t}
 	{signal-desktop,telegram-desktop}
 
+#Emacs
+super + shift + Return
+	emacsclient -s /tmp/emacs1000/server -c
+	
 #Vifm
-super + f
-	st -e vifm ~ ~/Documents/University
+#super + f
+#	st -e vifm ~ ~/Documents/University
 
 #Pcmanfm
 super + shift + f
 	pcmanfm
 
 #Zoom
-super + z
-	$HOME/.local/bin/scripts/zoom.sh
+#super + z
+#	$HOME/.local/bin/scripts/zoom.sh
 
 #Youtube
 super + s; {g,j,u,a,s,w,p,space}
@@ -31,24 +35,24 @@ super + s; m
 	$HOME/.local/bin/scripts/modify-script.sh
 
 #Newsboat
-super + y
-	st -e newsboat
+#super + y
+#	st -e newsboat
 
 #Mail
-super + g
-	$HOME/.local/bin/scripts/mail.sh
+#super + g
+#	$HOME/.local/bin/scripts/mail.sh
 
 #Calendar
-super + a
-	st -e calcurse
+#super + a
+#	st -e calcurse
 
 #Reddit
 super + r
 	$HOME/.local/bin/scripts/redyt
 
 #Passmenu
-super + shift + p
-	$HOME/.local/bin/scripts/passmenu2
+#super + shift + p
+#	$HOME/.local/bin/scripts/passmenu2
 
 #Volume
 super + minus
@@ -63,16 +67,16 @@ super + shift + m
 	st -e pulsemixer
 
 #Music
-super + p
-	$HOME/.local/bin/scripts/pause.sh
-super + control + p
-	$HOME/.local/bin/scripts/stop.sh
-super + slash
-	$HOME/.local/bin/scripts/play.sh
-super + b
-	mocp -r
-super + n
-	mocp -f
+#super + p
+#	$HOME/.local/bin/scripts/pause.sh
+#super + control + p
+#	$HOME/.local/bin/scripts/stop.sh
+#super + slash
+#	$HOME/.local/bin/scripts/play.sh
+#super + b
+#	mocp -r
+#super + n
+#	mocp -f
 
 #Lockscreen
 super + shift + BackSpace
