@@ -1,5 +1,4 @@
-#!/bin/sh
-st -e
+#!/bin/bash
 {
 cd ~/.local/src/dwm/
 doas make clean install

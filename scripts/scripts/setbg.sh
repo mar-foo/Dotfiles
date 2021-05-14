@@ -7,7 +7,8 @@
 new_wall() {
 wal -i $1 # Modify pywal color palettes and the background
 sed -i '/SchemeUrg/d;s/sel_border\[\].*$/sel_border\[\] = "#900000";/' $HOME/.cache/wal/colors-wal-dwm.h # Set border color to always be red
-sed '/^st/d;/{/d;/}/d' ~/.local/bin/scripts/updatewal.sh | /bin/sh # Update suckless binaries from the terminal you are in
+$HOME/.local/bin/scripts/updatewal.sh # Update suckless binaries
+#sed '/^st/d;/{/d;/}/d' $HOME/.local/bin/scripts/updatewal.sh | /bin/sh # Update suckless binaries from the terminal you are in
 exit
 }
 
@@ -17,11 +18,24 @@ sed -i '/SchemeUrg/d;s/sel_border\[\].*$/sel_border\[\] = "#900000";/' $HOME/.ca
 exit
 }
 
-print_usage() {
-printf "Usage:\n\tsetbg [OPTIONS]\nOPTIONS:\n\t-h:\t Print this help message\n\t-i: Image\t Set image as background\n\t-R:\t Reload previous backround\n"
+interactive_wall() {
+new_wall=$(find $HOME/Media/Pictures/wallpapers/ -type f -iname "*.jpg" -or -iname "*.png" | sed 's/^.*wallpapers\///' | dmenu -i -p "New wallpaper: ")
+test -z $new_wall ||
+{ wal -i $HOME/Media/Pictures/wallpapers/$new_wall
+sed -i '/SchemeUrg/d;s/sel_border\[\].*$/sel_border\[\] = "#900000";/' $HOME/.cache/wal/colors-wal-dwm.h # Set border color to always be red
+$HOME/.local/bin/scripts/updatewal.sh # Update suckless binaries spawning a new terminal
+}
+#sed '/^st/d;/{/d;/}/d' $HOME/.local/bin/scripts/updatewal.sh | /bin/sh # Update suckless binaries from the terminal you are in
+exit
 }
 
-while getopts ":hi:R" o; do case "${o}" in
+print_usage() {
+printf "Usage:\n\tsetbg [OPTIONS]\nOPTIONS:\n\t-d: Get a dmenu prompt to choose wallpaper\n\t-h:\t Print this help message\n\t-i: Image\t Set image as background\n\t-R:\t Reload previous backround\n"
+}
+
+while getopts ":hi:dR" o; do case "${o}" in
+			d) interactive_wall
+			;;
 			h) print_usage 
 			exit
 			;;
