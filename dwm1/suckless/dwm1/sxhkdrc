@@ -6,6 +6,10 @@ super + Return
 super + bracketleft
 	firefox
 
+# Tor Browser
+super + w
+	/home/mario/.local/bin/scripts/tor_launcher.sh
+
 #Chat
 super + bracketright; {s,t}
 	{signal-desktop,telegram-desktop}
