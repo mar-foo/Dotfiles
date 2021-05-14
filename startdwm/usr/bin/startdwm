@@ -2,49 +2,21 @@
 
 picom &
 xmodmap /home/mario/.Xmodmap
-wal -R &
-
-#Put monitor on the left
-screen=$(xrandr | grep HDMI-A-0 | sed "s/ /;/g" | awk -F';' '{print $2}')
-
-case $screen in
-	"connected")xrandr --output eDP --primary --mode 1366x768 --pos 1920x163 --rotate normal --output VGA-1 --mode 1920x1200 --pos 0x0 --rotate normal;;
-	*);;
-esac
+$HOME/.local/bin/scripts/setbg.sh -R &
 
 ##SET DWM BAR##
 
 #Functions
-dat(){
+function dat(){
 	dat=$(date +"%a, %d %b")
 	echo -e $dat
 }
-tim(){
+function tim(){
 	tim=$(date +"%H:%M")
 	echo -e $tim
 }
 
-# bat(){ battery=$(cat /sys/class/power_supply/BAT0/capacity)
-# 	status=$(cat /sys/class/power_supply/BAT0/status)
-# 	if [[ "$battery" -gt 75 ]]; then
-# 			icon=$""
-# 	elif [[ "$battery" -le 75 ]] && [[ "$battery" -gt 50 ]]; then
-# 			icon=$""
-# 	elif [[ "$battery" -gt 33 ]] && [[ "$battery" -le 50 ]]; then
-# 			icon=$""
-# 	elif [[ "$battery" -gt 10 ]] && [[ "$battery" -le 33 ]]; then
-# 			icon=$""
-# 	else
-# 			icon=$""
-# 	fi
-# 	if [[ $status = "Discharging" ]]; then 
-# 		echo "$icon $battery%"
-# 	else 
-# 		echo "$icon $battery%"
-# 	fi
-# }	
-
-volume(){
+function volume(){
 	STATUS=$(amixer sget Master | tail -n1 | sed -r "s/.*\[(.*)\]/\1/")
 	VOL=$(amixer get Master | tail -n1 | sed -r "s/.*\[(.*)%\].*/\1/")
 	if [ "$STATUS" = "off" ]; then
@@ -63,16 +35,11 @@ volume(){
 
 #Loop to write on the bar
 while(true); do
-whtr=$(cat /home/mario/.local/bin/wheather.txt)
-mem=$(free -h | awk '/^Mem:/ {print $3 "/" $2}')
-disk=$(cat /home/mario/.local/bin/disk.txt)
 song=$(cat /home/mario/.local/bin/song.txt)
 battery="Battery: $(cat /sys/class/power_supply/BAT0/capacity)"
 if [[ "$song" != "" ]]; then
-	#xsetroot -name "[ $song] [ $mem] [$(volume)] [ $(dat)] [ $(tim)]"
 	xsetroot -name " $song [ $(volume) ] [ $battery ] [ $(dat) $(tim) ]"
 else 
-	#xsetroot -name "[ $mem] [$(volume)]  [ $(dat)] [ $(tim)]"
 	xsetroot -name " [ $(volume) ] [ $battery ] [ $(dat) $(tim) ]"
 fi	
 	sleep 1s
@@ -82,7 +49,7 @@ done &
 dunst &
 
 #Start sxhkd
-sxhkd -c ~/Github/suckless/dwm1/sxhkdrc &
+sxhkd -c ~/.local/src/dwm/sxhkdrc &
 
 # Start emacs as first program
 {

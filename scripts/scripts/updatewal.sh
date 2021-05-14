@@ -1,7 +1,7 @@
 #!/bin/sh
 st -e
 {
-cd ~/.local/src/dwmnew/
+cd ~/.local/src/dwm/
 doas make clean install
 cd ~/Github/suckless/dmenu1/
 doas make clean install

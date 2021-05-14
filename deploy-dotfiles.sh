@@ -11,7 +11,7 @@ test -z $WALLPAPER_DIR && WALLPAPER_DIR="$HOME/Media/Pictures"
 test -z $SCRIPTS_DIR && SCRIPTS_DIR="$HOME/.local/bin"
 
 #Deploy my personal scripts to ~/.local/bin/scripts
-function deploy_scripts() {
+deploy_scripts() {
     echo "Deploying scripts"
     stow -t $SCRIPTS_DIR scripts
     echo "Done."
@@ -28,7 +28,7 @@ function deploy_suckless() {
 }
 
 # Deploy configs in ~/.config
-function deploy_config() {
+deploy_config() {
     configs="bspwm calcurse herbsluftwm	htop msmtp mutt newsboat openbox polybar sxhkd vifm"
     dotfiles=" .vimrc .bashrc .zshrc"
     
@@ -46,14 +46,14 @@ function deploy_config() {
 }
 
 # Deploy wallpapers in $WALLPAPER_DIR/wallpapers
-function deploy_wallpaper() {
+deploy_wallpaper() {
     echo "Deploying wallpapers"
     stow -t $WALLPAPER_DIR wallpapers
     echo "Done."
 }
 
 # Deploy files needed to setup a dwm session in the display manager
-function deploy_dwm() {
+deploy_dwm() {
     echo "Deploying dwm.desktop and startdwm to /usr/share/xsessions/dwm.desktop and /usr/bin/startdwm\nnow dwm should appear in the display manager"
     doas stow -t / xsessions
     doas stow -t / startdwm
@@ -61,7 +61,7 @@ function deploy_dwm() {
 }
 
 # Deploy everything
-function deploy_all_dotfiles() {
+deploy_all_dotfiles() {
     echo "Deploying everything"
     deploy_suckless ; deploy_config ; deploy_wallpaper; deploy_dwm
     echo "Done."
