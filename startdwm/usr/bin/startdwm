@@ -1,7 +1,9 @@
 #!/bin/bash
 
 picom &
+setxkbmap gb
 xmodmap /home/mario/.Xmodmap
+xcape -e 'Super_L=Escape'
 $HOME/.local/bin/scripts/setbg.sh -R &
 
 ##SET DWM BAR##
@@ -39,9 +41,9 @@ song=$(cat /home/mario/.local/bin/song.txt)
 battery="Battery: $(cat /sys/class/power_supply/BAT0/capacity)"
 if [[ "$song" != "" ]]; then
 	xsetroot -name " $song [ $(volume) ] [ $battery ] [ $(dat) $(tim) ]"
-else 
+else
 	xsetroot -name " [ $(volume) ] [ $battery ] [ $(dat) $(tim) ]"
-fi	
+fi
 	sleep 1s
 done &
 
