@@ -18,6 +18,7 @@ bindkey -v
 # End of lines configured by zsh-newuser-install
 #
 
+export DWM_DIR=$HOME/.local/src/dwmnew/
 ##ALIASES##
 alias f='fzf -e --height=10% --layout=reverse'
 alias fwh='echo "Changing firewall zone to home..." ; sudo firewall-cmd --change-interface=wlp2s0 --zone=home'
@@ -33,12 +34,21 @@ alias neomutt='mw -Y && neomutt'
 alias pvpn='sudo protonvpn'
 alias :q='exit'
 alias sxiv='devour sxiv'
-alias vim='vim'
-alias v='vifmrun ~/Documents/University ~'
 alias yt='/usr/local/bin/youtube-dl -x -f bestaudio'
+alias c='. $HOME/.local/bin/scripts/fzfcd.sh'
+## Nvim
+alias v='nvim'
+alias vc='cd ~/.config/nvim/ && nvim init.lua'
+## Zsh
+alias zc='$EDITOR ~/.zshrc'
+## DWM
+alias dc='cd $DWM_DIR && nvim config.def.h'
 
-EDITOR=vim
-VISUAL=vim
+## Configs
+alias dc='cd ~/.local/src/dwm/ && nvim config.def.h'
+
+EDITOR=nvim
+VISUAL=nvim
 TERMINAL=st
 
 #Prompt
@@ -49,5 +59,6 @@ $ "
 export PATH="${HOME}/.local/bin/:${PATH}"
 export PATH="${HOME}/.local/bin/scripts/:${PATH}"
 export PATH="${PATH}:/opt/bin/plan9/"
+export PATH="${HOME}/.cargo/bin/:${PATH}"
 
 source /home/mario/Github/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
