@@ -9,6 +9,7 @@
 
 prevdir=$PWD
 cd $HOME
+export FZF_DEFAULT_COMMAND='find . -type f'
 new_dir=$HOME/$(fzf --border=rounded --height=30% -e | xargs dirname)
 cd -
 test -z $new_dir || cd $new_dir
