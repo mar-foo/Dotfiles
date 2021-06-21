@@ -18,7 +18,7 @@ deploy_scripts() {
 }
 
 # Deploy suckless software in $SUCKLESS_DIR/suckless
-function deploy_suckless() {
+deploy_suckless() {
     suck_sw="dmenu dmenu1 dwm dwm1 slock st surf tabbed"
     for x in ${suck_sw}; do
 	stow -t $SUCKLESS_DIR $x
