@@ -1,0 +1,36 @@
+#!/bin/bash
+file=$(ls /home/mario/Documents/Personal/Bilancio | dmenu -i -p "Calcola il bilancio:")
+tot=0
+entrate=0
+uscite=0
+
+operazione=$(echo -e "Dettagli\nEntrate\nGuadagno\nSpese" | dmenu -i -p "Bilancio:")
+
+case $operazione in
+	"Dettagli") date=$(awk '{print $1}' $file | dmenu -i -p "Data:")
+		spesa=$(awk '{print $2}' $file)
+		causale=$(awk '{print $3}' $file)
+		notify-send "$date" "$spesa $causale"
+		;;
+	"Entrate") for x in $(awk '/\+/ {print $2}' $file | sed 's/\+//g'); do
+		((entrate+=x))
+	done
+	notify-send "$entrate"
+	;;
+	"Guadagno") for x in $(awk '/\+/ {print $2}' $file | sed 's/\+//g'); do
+		((entrate+=x))
+	done
+	for x in $(awk '/\-/ {print $2}' $file | sed 's/\-//g'); do
+		((uscite-=x))
+	done
+	((tot=$entrate-$uscite))
+	notify-send "$tot"
+	;;
+	"Spese") for x in $(awk '/\-/ {print $2}' $file | sed 's/\-//g'); do
+		((uscite-=x))
+	done
+	notify-send "$uscite"
+	;;
+	*);;
+esac
+

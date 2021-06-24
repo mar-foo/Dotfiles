@@ -1,0 +1,46 @@
+#!/bin/sh
+# Author: Mario Forzanini https://marioforzanini.com
+# Date: 20/06/2021
+# Description: Prompt for a WiFi network configuration
+# Dependencies: wpa_supplicant, fzf https://github.com/junegunn/fzf
+# Has to be run as root
+
+gen_wpa_conf() { cat > $1 <<EOF
+  network={
+  ssid="$2"
+  key_mgmt=WPA-PSK
+  psk="$3"
+}
+EOF
+}
+
+# https://github.com/dylanaraps/pure-sh-bible
+trim_string() {
+  # Remove all leading white space
+  trim=${1#${1%%[![:space:]]*}}
+  # Remove all trailing white space
+  trim=${trim%${trim##*[![:space:]]}}
+  printf '%s\n' "$trim"
+}
+
+export FZF_DEFAULT_OPTS="--layout=reverse --height=15 --header=\"Choose a WiFi network\""
+conf_dir="${WPA_CONF_DIR:-/root}"
+interface="$(trim_string "$(ip addr | grep '^[0-9]:\s\+w' | cut -d: -f2)")"
+known_nets=`find $conf_dir/ -name "*.conf"`
+test -z "$known_nets" || net=`printf "$known_nets\nnew" | fzf`
+case "$net" in
+  "new") possible_nets=$(iw "$interface" scan | grep "SSID:" | cut -d: -f2)
+    chosen_net=$(printf "$possible_nets" | fzf)
+    test -z "$chosen_net" || {
+      printf "Name to identify it in the future: "
+          read -r name
+          printf "Password: "
+          read -r password
+          test -e "$conf_dir"/name.conf || gen_wpa_conf \
+            "$conf_dir"/name.conf "$chosen_net" "$password"
+          wpa_supplicant -c "$conf_dir"/"$name".conf -i "$interface" -B
+        } ;;
+    "") exit 1 ;;
+    *) wpa_supplicant -c "$net" -i "$interface" -B ;;
+  esac
+

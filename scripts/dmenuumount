@@ -1,0 +1,12 @@
+#!/bin/sh
+#Gives a dmenu prompt to unmount USB drives, excludes "/" "/home" "/boot" from the possible selections
+drives=$(lsblk -nrp | grep " /" | grep -v "\(/home\|/\)$" | awk '{print $1, "(" $4 ")", "on", $7}')
+if [[ "$drives" = "" ]]; then
+	exit 1
+fi	
+chosen=$(echo "$drives" | dmenu -i -p "Unmount which drive?" | awk '{print $1}')
+if [[ "$chosen" = "" ]]; then
+	 exit 1
+fi
+sudo umount "$chosen" && notify-send "Unmounting" "$chosen unmounted"
+

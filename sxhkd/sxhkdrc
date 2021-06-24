@@ -1,0 +1,121 @@
+#Terminal
+super + Return
+	st -e zsh
+
+#Dmenu
+super + semicolon
+	dmenu_run -x 768 -y 5.4 -z 384 -l 10
+
+#Firefox
+super + bracketleft
+	firefox
+
+#Social
+super + bracketright; {t,s}
+	{telegram-desktop,signal-desktop}
+
+#Vifm
+super + f
+	bspc desktop -f '^2' && st -e vifm ~ ~/Documents/University
+
+#Pcmanfm
+super + shift + f
+	pcmanfm
+
+#Zoom
+super + z
+	$HOME/.local/bin/scripts/zoom.sh
+
+#Bookmarks
+super + s; {g,j,u,a,s,w,p,space}
+	$HOME/.local/bin/scripts/bookmarks.sh {GentooWiki,Jitsi,Unimia,Ariel,Surf,Website,Protonmail,Url}
+super + s; y
+	$HOME/.local/bin/scripts/myyt -r
+super + s; m
+	$HOME/.local/bin/scripts/modify-script.sh
+
+#Newsboat
+super + y
+	bspc desktop -f '^4' && st -e newsboat
+
+#Mail
+super + g
+	bspc desktop -f '^5' && $HOME/.local/bin/scripts/mail.sh
+
+#Calendar
+super + a
+	bspc desktop -f '^7' && st -e calcurse
+
+#Reddit
+super + r
+	$HOME/.local/bin/scripts/redyt
+
+#Passmenu
+super + shift + p
+	$HOME/.local/bin/scripts/passmenu2
+
+#Quit/restart
+super + shift + {q,r}
+	bspc {quit, wm -r}
+
+#Window state
+super + {q,w,e}
+	bspc node -t {floating,tiled,fullscreen}
+
+#Focus
+super + {_,shift +}{h,j,k,l}
+	bspc node -{f,s} {west,south,north,east}
+
+#Desktops
+super + {_,shift +}{1-9,0}
+	bspc {desktop -f, node -d} '^{1-9,10}'
+super + Tab
+	bspc desktop -f last
+
+#Expand window outwards
+super + ctrl + {h,j,k,l}
+	bspc node -z {left -20 0, bottom 0 20, top 0 -20, right 20 0}
+
+#Preselect direction
+super + alt + {h,j,k,l}
+	bspc node -p {west,south,north,east}
+
+#Close
+super + d
+	bspc node -c
+
+#Volume
+super + minus
+	#amixer sset Master 5%-
+	$HOME/.local/bin/scripts/pavolume --down
+super + plus
+	#amixer sset Master 5%+
+	$HOME/.local/bin/scripts/pavolume --up
+super + m
+	pavucontrol
+super + shift + m
+	bspc desktop -f '^10' && st -e pulsemixer
+
+#Music
+super + p
+	$HOME/.local/bin/scripts/pause.sh
+super + control + p
+	$HOME/.local/bin/scripts/stop.sh
+super + slash
+	bspc desktop -f '^8' && $HOME/.local/bin/scripts/play.sh
+super + b
+	mocp -r
+super + n
+	mocp -f
+
+#Sticky client
+super + v
+	bspc node -g sticky
+
+#Lockscreen
+super + shift + BackSpace
+	$HOME/.local/bin/scripts/lock
+
+#Toggle master and stack
+super + shift + space
+	$HOME/.config/bspwm/toggle-master.sh
