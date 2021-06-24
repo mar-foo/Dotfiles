@@ -1,2 +1,0 @@
-#!/bin/sh
-exec xautolock -detectsleep -time 10 locker "/home/mario/bin/lock" -notify 30 -notifier "notify-send -u normal -t 30 'LOCKING screen in 30 seconds'" &

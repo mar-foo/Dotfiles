@@ -1,2 +1,0 @@
-#!/bin/sh
-gpg -r mario.forzanini@studenti.unimi.it -e $1 && shred -u $1
