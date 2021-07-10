@@ -1,5 +1,5 @@
 #!/bin/bash
-choice=$(echo "" | dmenu -x 768 -y 5.4 -z 384 -i -p "Quante ore vuoi studiare?")
+choice=$(echo "" | dmenu -c -l 2 -i -p "Quante ore vuoi studiare?")
 case "$choice" in
 	"1") notify-send "1 ora" "Hai scelto di studiare per un'ora";;
 	"") notify-send "Aborted" ; exit 1;;
@@ -19,7 +19,7 @@ done
 sleep 3600
 mocp -s ; notify-send "Fine" "Hai studiato per $choice ore"
 echo $(date '+%d/%m, %H:%M') >> ~/.local/bin/study.txt
-again=$(echo -e "Si\nNo" | dmenu -x 768 -y 5.4 -z 384 -i -p "Vuoi studiare ancora?")
+again=$(echo -e "Si\nNo" | dmenu -c -i -p "Vuoi studiare ancora?")
 case "$again" in
 	"Si") /home/mario/.local/bin/scripts/work.sh;;
 	*) notify-send "Fine sessione di studio";;

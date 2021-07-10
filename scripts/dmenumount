@@ -1,12 +1,12 @@
 #!/bin/sh
 
-#Gives a dmenu prompt to ask which devices you want to mount and where, 
+#Gives a dmenu prompt to ask which devices you want to mount and where,
 #if the directory doesn't exist then it is created
-chosen=$(lsblk -rpo "Name,Size,type,mountpoint" | grep "part $" | awk '{print $1, "(" $2 ")"}' | dmenu -i -p "Mount which drive?" | awk '{print $1}') || exit 1
-mountdir=$( find /mnt /home /media -maxdepth 2 -type d 2>/dev/null | dmenu -i -p "Mount where?")
+chosen=$(lsblk -rpo "Name,Size,type,mountpoint" | grep "part $" | awk '{print $1, "(" $2 ")"}' | dmenu -c -l 15 -g 3 -i -p "Mount which drive?" | awk '{print $1}') || exit 1
+mountdir=$( find /mnt /home /media -maxdepth 2 -type d 2>/dev/null | dmenu -c -l 15 -g 3 -i -p "Mount where?")
 ["$mountdir" = "" ] && exit 1
-if [! -d "$mountdir" ]; then 
-	mkdiryn=$(echo "No\nYes" | dmenu -i -p "Directory doesn't exist, create it?") || exit 1
+if [! -d "$mountdir" ]; then
+	mkdiryn=$(echo "No\nYes" | dmenu -c -l 15 -g 3 -i -p "Directory doesn't exist, create it?") || exit 1
 	[mkdiryn = "Yes" ] && (mkdir -p "$mountdir" || sudo mkdir -p "$mountdir" )
 fi
 sudo mount "$chosen" "$mountdir"; user = "mario"; ug ="sudo"; sudo chown "$user":"$ug" "$mountdir"

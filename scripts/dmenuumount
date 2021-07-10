@@ -3,8 +3,8 @@
 drives=$(lsblk -nrp | grep " /" | grep -v "\(/home\|/\)$" | awk '{print $1, "(" $4 ")", "on", $7}')
 if [[ "$drives" = "" ]]; then
 	exit 1
-fi	
-chosen=$(echo "$drives" | dmenu -i -p "Unmount which drive?" | awk '{print $1}')
+fi
+chosen=$(echo "$drives" | dmenu -c -l 15 -g 3 -i -p "Unmount which drive?" | awk '{print $1}')
 if [[ "$chosen" = "" ]]; then
 	 exit 1
 fi

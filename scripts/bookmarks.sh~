@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 BROWSER="$HOME/.local/bin/scripts/surftab.sh"
 BROWSERALT="firefox "
 	case $1 in

@@ -8,14 +8,14 @@
 
 defcmd="fzf"
 #guicmd="rofi -dmenu -i" #uncomment next line for dmenu
-guicmd="dmenu -c -g 3 -i -l 15"
+guicmd="dmenu -c -l 15 -g 3 -i"
 promptcmd="$defcmd"
 if [ -z "$*" ]; then
-	echo -n "Download Audio: "
+	echo -n "Youtube: "
 	read -r query
 else
 	case "$1" in
-		-r) query=$(echo | $guicmd -p "Download Audio: ")
+		-r) query=$(echo | $guicmd -p "Youtube: ")
 			promptcmd="$guicmd -p Video:";;
 		*) query="$*";;
 	esac
@@ -62,10 +62,9 @@ while true; do
 	echo -e "$choice\t($id)"
 	case $id in
 		# 11 digit id = video
-		???????????) notify-send "Downloading Audio" ; youtube-dl -x -f bestaudio"$videolink$id" ; notify-send "Download Finished";;
+		???????????) mpv "$videolink$id";;
 		# 34 digit id = playlist
-		??????????????????????????????????) notify-send "Downloading Audio" ; youtube-dl -x -f bestaudio "$playlink$id" ; notify-send "Download Finished";;
+		??????????????????????????????????) mpv "$playlink$id";;
 		*) exit ;;
 	esac
 done
-

@@ -1,5 +1,5 @@
 #!/bin/sh
-command=$(echo "Connect\nDisconnect\nReload\nStatus" | dmenu -i -p "VPN:")
+command=$(echo "Connect\nDisconnect\nReload\nStatus" | dmenu -c -l 2 -g 2 -i -p "VPN:")
 case "$command" in
 	"Connect") sudo protonvpn c -f > ~/.local/bin/vpn.txt ; notify-send "VPN" "$(cat ~/.local/bin/vpn.txt)";;
 	"Disconnect") sudo protonvpn d > ~/.local/bin/vpn.txt ; notify-send "VPN" "$(cat ~/.local/bin/vpn.txt)";;

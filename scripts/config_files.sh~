@@ -1,6 +1,9 @@
 #!/bin/sh
 
 choice=$(echo "bash\ncompton\ndmenu\ndunst\ndwm\nherbstluft\nmocp\nneofetch\nnvim\nqutebrowser\nstartdwm\nst\nvifm" | dmenu -i -p "Configuration file:")
+#if [[ -z nvim ]]; then
+#	nvim = "nvim"
+#fi
 case "$choice" in
 	"bash") st "nvim" "/home/mario/.bashrc";;
 	"compton") st nvim "/home/mario/.config/compton.conf";;

@@ -1,9 +1,9 @@
 #!/bin/bash
-choice=$(echo -e "Foglio di calcolo\nPresentazione\nRelazione" | dmenu -i -p "Aprire:")
+choice=$(echo -e "Foglio di calcolo\nPresentazione\nRelazione" | dmenu -c -i -p "Aprire:")
 #LOEFM=$(/home/mario/Documents/University/LOEFM)
 
 case "$choice" in
-	"Foglio di calcolo") choice=$(echo -e "e/m\nInteferometro\nLuce\nMillikan\nPrisma\nReticolo" | dmenu -i -p "Esperienza:")
+	"Foglio di calcolo") choice=$(echo -e "e/m\nInteferometro\nLuce\nMillikan\nPrisma\nReticolo" | dmenu -c -i -p "Esperienza:")
 		case "$choice" in
 			"e/m") libreoffice "/home/mario/Documents/University/LOEFM/e-m/LU4--e-m--Zarrillo.xlsx" || notify-send "File not found";;
 			"Interferometro") libreoffice "/home/mario/Documents/University/LOEFM/Interferometro/LU4--Inteferometro--Bocchino.xlsx" || notify-send "File not found";;
@@ -13,7 +13,7 @@ case "$choice" in
 			"Reticolo") libreoffice "/home/mario/Documents/University/LOEFM/Reticolo/LU4--Reticolo--Forzanini.ods" || notify-send "File not found";;
 			*);;
 			esac;;
-	"Presentazione") choice=$(echo -e "Dispensa\ne/m\nInteferometro\nLuce\nMillikan\nPrisma\nReticolo" | dmenu -i -p "Esperienza:")
+	"Presentazione") choice=$(echo -e "Dispensa\ne/m\nInteferometro\nLuce\nMillikan\nPrisma\nReticolo" | dmenu -c -i -p "Esperienza:")
 		case "$choice" in
 			"Dispensa") zathura "/home/mario/Documents/University/LOEFM/Dispensa.pdf" || notify-send "File not found";;
 			"e/m") notify-send "File not found";;
@@ -24,8 +24,8 @@ case "$choice" in
 			"Reticolo") zathura "/home/mario/Documents/University/LOEFM/Reticolo/Reticolo.pdf" || notify-send "File not found";;
 			*);;
 			esac;;
-	
-	"Relazione") choice=$(echo -e "e/m\nInteferometro\nLuce\nMillikan\nPrisma\nReticolo" | dmenu -i -p "Esperienza:")
+
+	"Relazione") choice=$(echo -e "e/m\nInteferometro\nLuce\nMillikan\nPrisma\nReticolo" | dmenu -c -i -p "Esperienza:")
 		case "$choice" in
 			"e/m") zathura "/home/mario/Documents/University/LOEFM/e-m/Relazione/LU4-e-m.pdf" || notify-send "File not found";;
 			"Interferometro") zathura "/home/mario/Documents/University/LOEFM/Interferometro/Relazione/LU4-Interferometro.pdf" || notify-send "File not found";;
