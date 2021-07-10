@@ -1,4 +1,7 @@
 #!/bin/bash
+# from https://github.com/bugswriter/myyt, modified to download videos using
+# youtube-dl
+
 #dependencies: mpv youtube-dl fzf rofi/dmenu
 # search videos and playlists on youtube and play them in mpv, without an API
 # usage:

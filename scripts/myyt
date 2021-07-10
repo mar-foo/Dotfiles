@@ -1,4 +1,7 @@
 #!/bin/sh
+# from https://github.com/bugswriter/myyt, I'm trying to make it work with
+# busybox ash and utils (also sbase https://core.suckless.org/sbase)
+
 #dependencies: mpv youtube-dl fzf rofi/dmenu
 # search videos and playlists on youtube and play them in mpv, without an API
 # usage:
