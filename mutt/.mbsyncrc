@@ -1,0 +1,24 @@
+IMAPStore mario.forzanini@studenti.unimi.it-remote
+Host mailserver.unimi.it
+Port 993
+User mario.forzanini@studenti.unimi.it
+PassCmd "gpg2 --use-agent -d /home/mario/.config/mutt/unimi.gpg"
+AuthMechs LOGIN
+SSLType IMAPS
+CertificateFile /etc/ssl/cert.pem
+
+MaildirStore mario.forzanini@studenti.unimi.it-local
+Subfolders Verbatim
+Path /home/mario/.local/share/mail/mario.forzanini@studenti.unimi.it/
+Inbox /home/mario/.local/share/mail/mario.forzanini@studenti.unimi.it/INBOX
+
+Channel mario.forzanini@studenti.unimi.it
+Expunge Both
+Master :mario.forzanini@studenti.unimi.it-remote:
+Slave :mario.forzanini@studenti.unimi.it-local:
+Patterns * !"[Gmail]/All Mail"
+Create Both
+SyncState *
+MaxMessages 0
+ExpireUnread no
+# End profile
