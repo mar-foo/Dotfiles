@@ -1,9 +1,11 @@
+dmenu/config.h
 dmenu/dmenu
 dmenu/dmenu.o
 dmenu/drw.o
 dmenu/stest
 dmenu/stest.o
 dmenu/util.o
+st/config.h
 st/st
 st/st.o
 st/x.o
