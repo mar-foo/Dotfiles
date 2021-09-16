@@ -5,6 +5,10 @@ dmenu/drw.o
 dmenu/stest
 dmenu/stest.o
 dmenu/util.o
+dwm/config.h
+dwm/drw.o
+dwm/dwm.o
+dwm/util.o
 st/config.h
 st/st
 st/st.o
