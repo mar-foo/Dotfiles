@@ -22,14 +22,13 @@ static const char *colors[][3]      = {
 static const char *tags[] = { "I", "II", "III", "IV", "V"};
 
 static const Rule rules[] = {
-	/* xprop(1):
-	 *	WM_CLASS(STRING) = instance, class
-	 *	WM_NAME(STRING) = title
-	 */
-	/* class      instance    title       tags mask     isfloating   monitor */
-    { "Firefox",  NULL,       NULL,       1 << 2,       0,           -1 },
-    { "mpv",      NULL,       NULL,       1 << 4,       0,           -1 },
-    { NULL,       NULL,       "cmus_open.sh", NULL,     1,           -1 },
+        /* xprop(1):
+         *	WM_CLASS(STRING) = instance, class
+         *	WM_NAME(STRING) = title
+         */
+        /* class      instance    title       tags mask     isfloating   monitor */
+        { "Firefox",  NULL,       NULL,       1 << 2,       0,           -1 },
+        { "mpv",      NULL,       NULL,       1 << 4,       0,           -1 },
 };
 
 /* layout(s) */
