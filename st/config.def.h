@@ -5,7 +5,8 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "monospace:pixelsize=12:antialias=true:autohint=true";
+
+static char *font = "Go Mono:pixelsize=12:antialias=true:autohint=true";
 static char *font2[] = { "Font Awesome:pixelsize=12"};
 static int borderpx = 0;
 
@@ -95,7 +96,7 @@ char *termname = "st-256color";
 unsigned int tabspaces = 8;
 
 /* bg opacity*/
-float alpha = 0.4;
+float alpha = 0.7;
 
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
