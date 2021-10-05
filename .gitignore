@@ -9,7 +9,14 @@ dwm/config.h
 dwm/drw.o
 dwm/dwm.o
 dwm/util.o
+slock/explicit_bzero.o
+slock/slock
+slock/slock.o
 st/config.h
 st/st
 st/st.o
 st/x.o
+surf/surf
+surf/surf.o
+surf/webext-surf.o
+surf/webext-surf.so
