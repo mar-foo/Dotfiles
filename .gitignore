@@ -8,6 +8,7 @@ dmenu/util.o
 dwm/config.h
 dwm/drw.o
 dwm/dwm.o
+dwm/dwm
 dwm/util.o
 slock/explicit_bzero.o
 slock/slock
@@ -20,3 +21,7 @@ surf/surf
 surf/surf.o
 surf/webext-surf.o
 surf/webext-surf.so
+tabbed/tabbed.o
+tabbed/tabbed
+tabbed/xembed.o
+tabbed/xembed
