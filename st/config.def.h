@@ -6,7 +6,7 @@
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
 
-static char *font = "Go Mono:pixelsize=12:antialias=true:autohint=true";
+static char *font = "Cousine:pixelsize=12:antialias=true:autohint=true";
 static char *font2[] = { "Font Awesome:pixelsize=12"};
 static int borderpx = 0;
 
@@ -18,7 +18,7 @@ static int borderpx = 0;
  * 4: value of shell in /etc/passwd
  * 5: value of shell in config.h
  */
-static char *shell = "/bin/bash";
+static char *shell = "/bin/sh";
 char *utmp = NULL;
 /* scroll program: to enable use a string like "scroll" */
 char *scroll = NULL;
@@ -96,7 +96,7 @@ char *termname = "st-256color";
 unsigned int tabspaces = 8;
 
 /* bg opacity*/
-float alpha = 0.7;
+float alpha = 1;
 
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
@@ -129,15 +129,17 @@ static const char *colorname[] = {
 	"#cccccc",
 	"#555555",
 	"black",
+	"#ffffea",
+	"white",
 };
 
 
 
 /*Default colors (colorname index) foreground, background, cursor*/
-unsigned int defaultfg = 7;
+unsigned int defaultfg = 260;
 unsigned int defaultbg = 258;
-static unsigned int defaultcs = 256;
-static unsigned int defaultrcs =257;
+static unsigned int defaultcs = 257;
+static unsigned int defaultrcs =258;
 /*
  * Default shape of cursor
  * 2: Block ("█")
