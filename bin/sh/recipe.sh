@@ -21,21 +21,9 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-
-choice=$(echo "bash\ncompton\ndmenu\ndunst\ndwm\nherbstluft\nmocp\nneofetch\nnvim\nqutebrowser\nstartdwm\nst\nvifm" | dmenu -i -p "Configuration file:")
-case "$choice" in
-	"bash") st "nvim" "/home/mario/.bashrc";;
-	"compton") st nvim "/home/mario/.config/compton.conf";;
-	"dmenu") st nvim "/home/mario/suckless/dmenu/config.h";;
-	"dunst") st nvim "/home/mario/.config/dunst/dunstrc";;
-	"dwm") st nvim "/home/mario/suckless/dwm/config.h";;
-	"herbstluft") st nvim "/home/mario/.config/herbstluftwm/autostart";;
-	"mocp") st nvim "/home/mario/.moc/.config";;
-	"neofetch") st nvim "/home/mario/.config/neofetch/config.conf";;
-	"nvim") st nvim "/home/mario/.config/nvim/init.vim";;
-	"qutebrowser") st nvim "/home/mario/.config/qutebrowser/config.py";;
-	"startdwm") st nvim "/usr/bin/startdwm";;
-	"st") st nvim "/home/mario/suckless/st/config.h";;
-	"vifm") st nvim "/home/mario/.config/vifm/vifmrc";;
-	*) notify-send "Aborted" "No configuration file chosen";;
-esac
+cd /tmp
+curl -LO https://based.cooking/index.html 2>/dev/null
+recipe=$(sed '0,/id=artlist/d;/<\/ul>/,$d;s/^.*\">//;s/<\/a.*$//' /tmp/index.html | dmenu -i -l 20 -p "Recipe: ")
+recipe_address=$(grep "$recipe" /tmp/index.html | cut -d\" -f2)
+${BROWSER:-surf-open.sh} https://based.cooking/$recipe_address
+rm /tmp/index.html
