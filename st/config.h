@@ -128,7 +128,7 @@ static const char *colorname[] = {
 	/* More colors can be added after 255 to use with DefaultXX */
 	"#cccccc",
 	"#555555",
-	"black",
+	"#222222",
 	"#ffffea",
 	"white",
 };
@@ -136,10 +136,10 @@ static const char *colorname[] = {
 
 
 /*Default colors (colorname index) foreground, background, cursor*/
-unsigned int defaultfg = 258;
-unsigned int defaultbg = 260;
-static unsigned int defaultcs = 257;
-static unsigned int defaultrcs = 260;
+unsigned int defaultfg = 260;
+unsigned int defaultbg = 258;
+static unsigned int defaultcs = 256;
+static unsigned int defaultrcs =258;
 /*
  * Default shape of cursor
  * 2: Block ("█")
@@ -199,7 +199,7 @@ static Shortcut shortcuts[] = {
 	{ ControlMask,          XK_Print,       toggleprinter,  {.i =  0} },
 	{ ShiftMask,            XK_Print,       printscreen,    {.i =  0} },
 	{ XK_ANY_MOD,           XK_Print,       printsel,       {.i =  0} },
-	{ ControlMask|ShiftMask, XK_equal,       zoom,           {.f = +1} },
+	{ ControlMask,          XK_equal,       zoom,           {.f = +1} },
 	{ ControlMask,          XK_minus,       zoom,           {.f = -1} },
 	{ TERMMOD,              XK_Home,        zoomreset,      {.f =  0} },
 	{ TERMMOD,              XK_C,           clipcopy,       {.i =  0} },
