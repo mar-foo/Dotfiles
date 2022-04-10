@@ -20,19 +20,19 @@ static const char *colors[][3]      = {
 	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
 };
 
-/* tagging 
+/* tagging
   * I - Terminal
   * II - Browser
   * III - Editor
   * IV - Misc
   */
-static const char *tags[] = { "I", "II", "III", "IV" };
+static const char *tags[] = { "A", "O", "E", "U" };
 
 static const Rule rules[] = {
 	/* xprop(1):
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
-	 */
+	*/
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Firefox",  NULL,       NULL,       1 << 1,       0,           -1 },
 	{ "mpv",       NULL,       NULL,       1 << 3,       0,           -1 },
@@ -56,9 +56,9 @@ static const Layout layouts[] = {
 #define MODKEY Mod4Mask
 #define TAGKEYS(KEY,TAG) \
 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
-	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
-	{ MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
-	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
+		{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
+		{ MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
+		{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
