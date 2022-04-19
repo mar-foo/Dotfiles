@@ -1,7 +1,4 @@
 #!/bin/bash
-# from https://github.com/bugswriter/myyt, modified to download videos using
-# youtube-dl
-
 #dependencies: mpv youtube-dl fzf rofi/dmenu
 # search videos and playlists on youtube and play them in mpv, without an API
 # usage:
@@ -11,14 +8,15 @@
 
 defcmd="fzf"
 #guicmd="rofi -dmenu -i" #uncomment next line for dmenu
-guicmd="dmenu -c -g 3 -i -l 15"
+guicmd="dmenu -i -l 15"
+#guicmd="dmenu -x 768 -y 5.4 -z 384 -i -l 15"
 promptcmd="$defcmd"
 if [ -z "$*" ]; then
-	echo -n "Download Video: "
+	echo -n "Youtube: "
 	read -r query
 else
 	case "$1" in
-		-r) query=$(echo | $guicmd -p "Download Video: ")
+		-r) query=$(echo | $guicmd -p "Youtube: ")
 			promptcmd="$guicmd -p Video:";;
 		*) query="$*";;
 	esac
@@ -65,10 +63,9 @@ while true; do
 	echo -e "$choice\t($id)"
 	case $id in
 		# 11 digit id = video
-		???????????) notify-send "Downloading Video" ; youtube-dl --prefer-free-formats "$videolink$id" ; notify-send "Download Finished";;
+		???????????) mpv --ytdl-format='bestvideo[height<720]+bestaudio' "$videolink$id";;
 		# 34 digit id = playlist
-		??????????????????????????????????) notify-send "Downloading Video" ;  youtube-dl --prefer-free-formats "$playlink$id" ; notify-send "Download Finished";;
+		??????????????????????????????????) mpv --ytdl-format='bestvideo[height<720]+bestaudio'  "$playlink$id";;
 		*) exit ;;
 	esac
 done
-
