@@ -65,8 +65,8 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, NULL };
-static const char *acmecmd[]  = { "9", "acme", "-f", "/usr/lib/plan9/font/pelm/unicode.9.font", NULL };
+static const char *dmenucmd[] = { "rofi", "-show", "run", "-theme", "generic", NULL };
+static const char *ytcmd[]    = { "myyt", NULL };
 static const char *termcmd[]  = { "st", NULL };
 static const char scratchpadname[] = "music";
 static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", "-e", "cmus", NULL };
@@ -83,6 +83,7 @@ static Key keys[] = {
 	{ MODKEY,             XK_r,      spawn,          {.v = dmenucmd} },
 	{ MODKEY,             XK_w,      spawn,          {.v = webcmd} },
 	{ MODKEY|ShiftMask,   XK_equal,  spawn,          {.v = raisevol} },
+	{ MODKEY,             XK_y,      spawn,          {.v = ytcmd } },
 	{ MODKEY,             XK_m,      togglescratch,  {.v = scratchpadcmd } },
 	{ MODKEY,             XK_b,      togglebar,      {0} },
 	{ MODKEY,             XK_j,      focusstack,     {.i = +1} },
