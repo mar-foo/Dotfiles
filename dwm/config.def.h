@@ -1,19 +1,19 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 1;        /* border pixel of windows */
+static const unsigned int borderpx  = 0;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int startwithgaps	    = 1;	 /* 1 means gaps are used by default */
 static const unsigned int gappx     = 10;       /* default gap between windows in pixels */
 static const int showbar            = 0;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "monospace:size=10" };
-static const char dmenufont[]       = "monospace:size=10";
+static const char *fonts[]          = { "FiraCode Nerd Font Mono:size=10", "FontAwesome:size=15" };
+static const char dmenufont[]       = "FiraCode Nerd Font Mono:size=10";
 static const char col_gray1[]       = "#21242b";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbc2cf";
-static const char col_gray4[]       = "#bbc2cf";
-static const char col_cyan[]        = "#51afef";
+static const char col_gray4[]       = "#51afef";
+static const char col_cyan[]        = "#21242b";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
@@ -26,7 +26,7 @@ static const char *colors[][3]      = {
   * III - Editor
   * IV - Misc
   */
-static const char *tags[] = { "A", "O", "E", "U" };
+static const char *tags[] = { "", "", "", "" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -35,7 +35,7 @@ static const Rule rules[] = {
 	*/
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Firefox",  NULL,       NULL,       1 << 1,       0,           -1 },
-	{ "mpv",       NULL,       NULL,       1 << 3,       0,           -1 },
+	{ "mpv",       NULL,      NULL,       1 << 3,       0,           -1 },
 	{ "acme",     NULL,       NULL,       1 << 2,       0,           -1 },
 };
 
@@ -104,12 +104,11 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,   XK_comma,  tagmon,         {.i = -1} },
 	{ MODKEY|ShiftMask,   XK_period, tagmon,         {.i = +1} },
 	{ MODKEY,             XK_g,      setgaps,        {.i = GAP_TOGGLE} },
-	TAGKEYS(              XK_1,                      0)
-	TAGKEYS(              XK_a,                          0)
-	TAGKEYS(              XK_o,                          1)
-	TAGKEYS(              XK_e,                          2)
-	TAGKEYS(              XK_u,                          3)
-	{ MODKEY|ShiftMask,   XK_q,      quit,               {0} },
+	TAGKEYS(              XK_a,                      0)
+	TAGKEYS(              XK_o,                      1)
+	TAGKEYS(              XK_e,                      2)
+	TAGKEYS(              XK_u,                      3)
+	{ MODKEY|ShiftMask,   XK_q,      quit,           {0} },
 };
 
 /* button definitions */
