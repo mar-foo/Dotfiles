@@ -331,11 +331,7 @@ globalkeys = gears.table.join(
    -- Prompt
    awful.key({ modkey }, "r",
       function()
-	 local screen = awful.screen.focused()
-	 if not screen.topbox.visible then
-	    screen.topbox.visible = true
-	 end
-	 screen.mypromptbox:run()
+	 awful.util.spawn("rofi -show run -theme generic")
       end,
       {description = "run prompt", group = "launcher"}),
 

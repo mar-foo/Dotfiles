@@ -1,0 +1,90 @@
+* {
+   font:         "Cousine Nerd Font 10";
+
+   red:		 #DA8548;
+   darkred:      #FF6C6B;
+   green:	 #98BE65;
+   yellow:	 #ECBE7B;
+   blue:	 #51AFEF;
+   darkblue:	 #2257A0;
+   purple:	 #A9A1E1;
+   cyan:	 #46D9FF;
+   darkcyan:	 #5699AF;
+
+    darkgreen:   #A3BE8C;
+    darkyellow:  #EBCB8B;
+    darkpurple:  #B48EAD;
+    foreground:  #BBC2CF;
+
+    background:  #282C34;
+    border:      #51AFEF;
+
+    background-color: transparent;
+    text-color:       @foreground;
+    padding:          0px;
+    margin:           0px;
+    width:            40%;
+    height:           50%;
+}
+
+
+window {
+  fullscreen: false;
+  border-radius: 16px;
+  padding: 1em;
+  background-color: @background;
+}
+
+mainbox {
+  padding:  0px;
+}
+
+prompt { enabled: false; }
+
+entry {
+	placeholder:       "Search";
+	placeholder-color: @foreground;
+	expand:            true;
+	padding:           1.5%;
+	border-radius:	   8px;
+	background-color:  @background;
+}
+
+inputbar {
+	children:         [ prompt, entry ];
+	background-image: url("images/pattern.png");
+	expand:           false;
+	border-radius:    10px;
+	padding:          50px 50px 50px 50px;
+}
+
+listview {
+  margin:   20px 120px;
+  spacing:  10px;
+  columns:  4;
+  fixed-columns: true;
+}
+
+element, element-text, element-icon {
+  cursor: pointer;
+}
+
+element {
+  padding:      8px;
+  spacing:      4px;
+  orientation:    vertical;
+  border-radius:  16px;
+}
+
+element selected {
+  background-color: @border;
+}
+
+element-icon {
+  size: 3em;
+  horizontal-align: 0.5;
+}
+
+element-text {
+  horizontal-align: 0.5;
+}
