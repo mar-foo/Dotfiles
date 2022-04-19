@@ -432,7 +432,7 @@ attachstack(Client *c)
 void
 buttonpress(XEvent *e)
 {
-	unsigned int i, x, click;
+	unsigned int i, j, x, click;
 	Arg arg = {0};
 	Client *c;
 	Monitor *m;
@@ -446,19 +446,23 @@ buttonpress(XEvent *e)
 		focus(NULL);
 	}
 	if (ev->window == selmon->barwin) {
-		i = x = 0;
+		i = x = m->ww / 2 - lrpad;
+		for (j = 0; j < LENGTH(tags); j++)
+			x += TEXTW(tags[j]);
+
+		x = i - (x - i) / 2;
+		i = 0;
+
 		do
 			x += TEXTW(tags[i]);
 		while (ev->x >= x && ++i < LENGTH(tags));
 		if (i < LENGTH(tags)) {
 			click = ClkTagBar;
 			arg.ui = 1 << i;
-		} else if (ev->x < x + blw)
+		} if (ev->x < blw)
 			click = ClkLtSymbol;
 		else if (ev->x > selmon->ww - (int)TEXTW(stext))
 			click = ClkStatusText;
-		else
-			click = ClkWinTitle;
 	} else if ((c = wintoclient(ev->window))) {
 		focus(c);
 		restack(selmon);
@@ -736,18 +740,17 @@ drawbar(Monitor *m)
 	}
 
 	x = 0;
-	w = blw = TEXTW(m->ltsymbol) + m->mw / 2;
+	w = TEXTW(m->ltsymbol) + m->mw / 2;
 	drw_setscheme(drw, scheme[SchemeNorm]);
 	drw_text(drw, x, 0, w, bh, lrpad / 2, m->ltsymbol, 0);
 	x = m->ww / 2 - lrpad;
 
 	t2w = x;
-	for(i = 0; i < LENGTH(tags); i++) {
-		w = TEXTW(tags[i]);
-		t2w += w;
-	}
+	for(i = 0; i < LENGTH(tags); i++)
+		t2w += TEXTW(tags[i]);
 
 	x -= (t2w - x) / 2;
+	blw = x;
 	for (i = 0; i < LENGTH(tags); i++) {
 		w = TEXTW(tags[i]);
 		drw_setscheme(drw, scheme[m->tagset[m->seltags] & 1 << i ? SchemeSel : SchemeNorm]);
