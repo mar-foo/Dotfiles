@@ -341,6 +341,9 @@ globalkeys = gears.table.join(
 
    awful.key({ modkey }, "x",
       function ()
+	 if not awful.screen.focused().topbox.visible then
+	    awful.screen.focused().topbox.visible = true
+	 end
 	 awful.prompt.run {
 	    prompt       = "Run Lua code: ",
 	    textbox      = awful.screen.focused().mypromptbox.widget,
