@@ -184,31 +184,39 @@ awful.screen.connect_for_each_screen(function(s)
 	 align   = center
       }
 
-      -- Create the wibox
-      s.topbox = awful.wibar({ position = "top", screen = s, visible = false})
+      -- Create the top wibox
+      s.topbox = awful.wibar({
+	    position = "top",
+	    screen   = s,
+	    visible  = false,
+	    shape    = gears.shape.rounded_bar,
+      })
 
       -- Add widgets to the wibox
       s.topbox:setup {
 	 layout = wibox.layout.align.horizontal,
 	 { -- Left widgets
             layout = wibox.layout.fixed.horizontal,
-            mylauncher,
-	    s.mytaglist, -- Middle widget
-            s.mypromptbox,
+	    wibox.container.margin(s.mytaglist, 10)
 	 },
-	 nil,
-	 { -- Right widgets
-            layout = wibox.layout.fixed.horizontal,
-            wibox.widget.systray(),
-            mytextclock,
+	 {
+	    layout = wibox.layout.fixed.horizontal,
+	    mylauncher,
+	    s.mypromptbox
 	 },
+	 {
+	    layout = wibox.layout.fixed.horizontal,
+	    wibox.widget.systray(),
+	    wibox.container.margin(mytextclock, 0, 10)
+	 }
       }
 
+      -- Bottom wibox
       s.botbox = awful.wibar({
 	    position = "bottom",
 	    screen = s,
 	    visible = false,
-	    width = gmath.round(awful.screen.focused().geometry.width / 2),
+	    width = gmath.round(s.geometry.width / 2),
 	    align = "center",
 	    stretch = false,
 	    opacity = 0.5
