@@ -153,13 +153,12 @@ awful.screen.connect_for_each_screen(function(s)
       set_wallpaper(s)
 
       -- Each screen has its own tag table.
-      awful.tag({ "a", "o", "e", "u" }, s, awful.layout.layouts[1])
+      awful.tag({ "⭕", "⭕", "⭕", "⭕" }, s, awful.layout.layouts[1])
 
       -- Create a promptbox for each screen
       s.mypromptbox = awful.widget.prompt.new({
-	    fg        = beautiful.bg_focus,
-	    fg_cursor = beautiful.fg_normal,
-	    bg_cursor = beautiful.bg_focus,
+	    fg_cursor = beautiful.bg_normal,
+	    bg_cursor = beautiful.fg_focus,
 	    font      = beautiful.font
       })
       -- Create an imagebox widget which will contain an icon indicating which layout we're using.
@@ -376,9 +375,9 @@ clientkeys = gears.table.join(
       {description = "minimize", group = "client"})
 )
 
-for i, key in ipairs(awful.screen.focused().tags) do
+for i, key in ipairs({"a", "o", "e", "u"}) do
    globalkeys = gears.table.join(globalkeys,
-				 awful.key({ modkey }, key.name,
+				 awful.key({ modkey }, key,
 				    function ()
 				       local screen = awful.screen.focused()
 				       local tag = screen.tags[i]
@@ -386,8 +385,8 @@ for i, key in ipairs(awful.screen.focused().tags) do
 					  tag:view_only()
 				       end
 				    end,
-				    {description = "view tag " .. key.name, group = "tag"}),
-				 awful.key({ modkey, "Control" }, key.name,
+				    {description = "view tag " .. key, group = "tag"}),
+				 awful.key({ modkey, "Control" }, key,
 				    function ()
 				       local screen = awful.screen.focused()
 				       local tag = screen.tags[i]
@@ -395,8 +394,8 @@ for i, key in ipairs(awful.screen.focused().tags) do
 					  awful.tag.viewtoggle(tag)
 				       end
 				    end,
-				    {description = "toggle tag " .. key.name, group = "tag"}),
-				 awful.key({ modkey, "Shift" }, key.name,
+				    {description = "toggle tag " .. key, group = "tag"}),
+				 awful.key({ modkey, "Shift" }, key,
 				    function()
 				       if client.focus then
 					  local tag = client.focus.screen.tags[i]
@@ -405,8 +404,8 @@ for i, key in ipairs(awful.screen.focused().tags) do
 					  end
 				       end
 				    end,
-				    {description = "move focused client to tag " .. key.name, group = "tag"}),
-				 awful.key({ modkey, "Control", "Shift" }, key.name,
+				    {description = "move focused client to tag " .. key, group = "tag"}),
+				 awful.key({ modkey, "Control", "Shift" }, key,
 				    function()
 				       if client.focus then
 					  local tag = client.focus.screen.tags[i]
@@ -415,7 +414,7 @@ for i, key in ipairs(awful.screen.focused().tags) do
 					  end
 				       end
 				    end,
-				    {description = "toggle focused client on tag " .. key.name, group = "tag"})
+				    {description = "toggle focused client on tag " .. key, group = "tag"})
    )
 end
 

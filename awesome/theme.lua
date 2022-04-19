@@ -14,13 +14,15 @@ local theme = {}
 theme.font          = "Cousine 10"
 
 theme.bg_normal     = "#21242b"
-theme.bg_focus      = "#51afef"
+--theme.bg_focus      = "#51afef"
+theme.bg_focus      = "#21242b"
 theme.bg_urgent     = "#ff6c6b"
-theme.bg_minimize   = "#c678dd"
+theme.bg_minimize   = theme.fg_focus
 theme.bg_systray    = theme.bg_normal
 
-theme.fg_normal      = "#bbc2cf"
-theme.fg_focus      = "#21242b"
+theme.fg_normal     = "#bbc2cf"
+-- theme.fg_focus      = "#21242b"
+theme.fg_focus      = "#51afef"
 theme.fg_urgent     = theme.fg_focus
 theme.fg_minimize   = theme.fg_focus
 
@@ -46,12 +48,12 @@ theme.prompt_fg     = theme.fg_focus
 --theme.taglist_bg_focus = "#ff0000"
 
 -- Generate taglist squares:
-local taglist_square_size = dpi(5)
+local taglist_square_size = dpi(0)
 theme.taglist_squares_sel = theme_assets.taglist_squares_sel(
-    taglist_square_size, theme.bg_normal
+    taglist_square_size, theme.fg_focus
 )
 theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(
-    taglist_square_size, theme.bg_focus
+    taglist_square_size, theme.fg_focus
 )
 
 -- Variables set for theming notifications:
