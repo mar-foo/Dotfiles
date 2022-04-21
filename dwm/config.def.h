@@ -5,7 +5,7 @@ static const unsigned int borderpx  = 0;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int startwithgaps	    = 1;	 /* 1 means gaps are used by default */
 static const unsigned int gappx     = 10;       /* default gap between windows in pixels */
-static const int showbar            = 0;        /* 0 means no bar */
+static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "FiraCode Nerd Font Mono:size=10", "FontAwesome:size=15" };
 static const char dmenufont[]       = "FiraCode Nerd Font Mono:size=10";
@@ -14,10 +14,12 @@ static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbc2cf";
 static const char col_gray4[]       = "#51afef";
 static const char col_cyan[]        = "#21242b";
-static const char *colors[][3]      = {
+static const char col_occ[]         = "#a626a4";
+static const char *colors[][4]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
 	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
+	[SchemeOcc]  = { col_occ,   col_gray1, col_gray2 },
 };
 
 /* tagging

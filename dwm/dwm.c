@@ -63,7 +63,7 @@
 
 /* enums */
 enum { CurNormal, CurResize, CurMove, CurLast }; /* cursor */
-enum { SchemeNorm, SchemeSel }; /* color schemes */
+enum { SchemeNorm, SchemeSel, SchemeOcc }; /* color schemes */
 enum { NetSupported, NetWMName, NetWMState, NetWMCheck,
        NetWMFullscreen, NetActiveWindow, NetWMWindowType,
        NetWMWindowTypeDialog, NetClientList, NetLast }; /* EWMH atoms */
@@ -718,8 +718,6 @@ void
 drawbar(Monitor *m)
 {
 	int x, w, t2w, tw = 0;
-	int boxs = drw->fonts->h / 9;
-	int boxw = drw->fonts->h / 6 + 2;
 	unsigned int i, occ = 0, urg = 0;
 	Client *c;
 
@@ -752,15 +750,19 @@ drawbar(Monitor *m)
 	x -= (t2w - x) / 2;
 	blw = x;
 	for (i = 0; i < LENGTH(tags); i++) {
+		if(m->tagset[m->seltags] & 1 << i)
+			drw_setscheme(drw, scheme[SchemeSel]);
+		else if(occ & 1 << i)
+			drw_setscheme(drw, scheme[SchemeOcc]);
+		else
+			drw_setscheme(drw, scheme[SchemeNorm]);
+
 		w = TEXTW(tags[i]);
-		drw_setscheme(drw, scheme[m->tagset[m->seltags] & 1 << i ? SchemeSel : SchemeNorm]);
 		drw_text(drw, x, 0, w, bh, lrpad / 2, tags[i], urg & 1 << i);
-		if (occ & 1 << i)
-			drw_rect(drw, x + boxs, boxs, boxw, boxw,
-				 m == selmon && selmon->sel && selmon->sel->tags & 1 << i,
-				 urg & 1 << i);
 		x += w;
 	}
+
+	/* Fill until the status text */
 	drw_setscheme(drw, scheme[SchemeNorm]);
 	w = TEXTW("") + m->ww - tw - x - lrpad;
 	drw_text(drw, x, 0, w, bh, lrpad / 2, " ", 0);
