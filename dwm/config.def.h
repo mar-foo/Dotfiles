@@ -74,7 +74,7 @@ static const char scratchpadname[] = "music";
 static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", "-e", "cmus", NULL };
 static const char *lowervol[] = { "amixer", "sset", "Master", "5%-", NULL };
 static const char *raisevol[] = { "amixer", "sset", "Master", "5%+", NULL };
-static const char *webcmd[]   = { "surf-open.sh", NULL };
+static const char *webcmd[]   = { "firefox", NULL };
 static const char *passcmd[]  = { "passmenu", NULL };
 
 static Key keys[] = {
@@ -84,7 +84,7 @@ static Key keys[] = {
 	{ MODKEY,             XK_p,      spawn,          {.v = passcmd} },
 	{ MODKEY,             XK_r,      spawn,          {.v = dmenucmd} },
 	{ MODKEY,             XK_w,      spawn,          {.v = webcmd} },
-	{ MODKEY|ShiftMask,   XK_equal,  spawn,          {.v = raisevol} },
+	{ MODKEY,             XK_plus,   spawn,          {.v = raisevol} },
 	{ MODKEY,             XK_y,      spawn,          {.v = ytcmd } },
 	{ MODKEY,             XK_m,      togglescratch,  {.v = scratchpadcmd } },
 	{ MODKEY,             XK_b,      togglebar,      {0} },
