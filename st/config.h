@@ -6,7 +6,7 @@
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
 
-static char *font = "Cousine:pixelsize=12:antialias=true:autohint=true";
+static char *font = "LucidaTypeWriter:pixelsize=16:antialias=true:autohint=true";
 static char *font2[] = { "Font Awesome:pixelsize=12"};
 static int borderpx = 0;
 
@@ -128,9 +128,9 @@ static const char *colorname[] = {
 	/* More colors can be added after 255 to use with DefaultXX */
 	"#cccccc",
 	"#555555",
-	"#21242b",
+	"#000000",
 	"#ffffea",
-	"#bbc2cf",
+	"#c2c3c7",
 };
 
 
