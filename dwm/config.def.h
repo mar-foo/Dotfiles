@@ -1,24 +1,24 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 0;        /* border pixel of windows */
+static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int startwithgaps	    = 1;	 /* 1 means gaps are used by default */
 static const unsigned int gappx     = 10;       /* default gap between windows in pixels */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "FiraCode Nerd Font Mono:size=10", "FontAwesome:size=15" };
-static const char dmenufont[]       = "FiraCode Nerd Font Mono:size=10";
-static const char col_gray1[]       = "#21242b";
-static const char col_gray2[]       = "#444444";
-static const char col_gray3[]       = "#bbc2cf";
-static const char col_gray4[]       = "#51afef";
-static const char col_cyan[]        = "#21242b";
-static const char col_occ[]         = "#a626a4";
+static const char *fonts[]          = { "LucidaTypeWriter:size=12", "FontAwesome:size=8" };
+static const char dmenufont[]       = "LucidaTypeWriter:size=12";
+static const char col_gray1[]       = "#000000";
+static const char col_gray2[]       = "#ff004d";
+static const char col_gray3[]       = "#c2c3c7";
+static const char col_gray4[]       = "#ff004d";
+static const char col_cyan[]        = "#000000";
+static const char col_occ[]         = "#008751";
 static const char *colors[][4]      = {
 	/*               fg         bg         border   */
-	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
+	[SchemeNorm] = { col_gray3, col_gray1, col_cyan },
+	[SchemeSel]  = { col_gray4, col_cyan,  col_gray2  },
 	[SchemeOcc]  = { col_occ,   col_gray1, col_gray2 },
 };
 
@@ -45,7 +45,7 @@ static const Rule rules[] = {
 static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
-static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
+static const int lockfullscreen = 0; /* 1 will force focus on the fullscreen window */
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
