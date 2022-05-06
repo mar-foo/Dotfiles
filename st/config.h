@@ -6,7 +6,7 @@
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
 
-static char *font = "LucidaTypeWriter:pixelsize=16:antialias=true:autohint=true";
+static char *font = "IBM Plex Mono:style=Italic:pixelsize=15:antialias=true:autohint=true";
 static char *font2[] = { "Font Awesome:pixelsize=12"};
 static int borderpx = 0;
 
@@ -96,7 +96,7 @@ char *termname = "st-256color";
 unsigned int tabspaces = 8;
 
 /* bg opacity*/
-float alpha = 0.7;
+float alpha = 1;
 
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {

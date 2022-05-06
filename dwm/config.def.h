@@ -1,14 +1,14 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 1;        /* border pixel of windows */
+static const unsigned int borderpx  = 2;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int startwithgaps	    = 1;	 /* 1 means gaps are used by default */
 static const unsigned int gappx     = 10;       /* default gap between windows in pixels */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "LucidaTypeWriter:size=10", "FontAwesome:size=7" };
-static const char dmenufont[]       = "LucidaTypeWriter:size=10";
+static const char *fonts[]          = { "IBM Plex Mono:size=11", "FontAwesome:size=7" };
+static const char dmenufont[]       = "IBM Plex Mono:size=11";
 static const char col_gray1[]       = "#000000";
 static const char col_gray2[]       = "#ff004d";
 static const char col_gray3[]       = "#c2c3c7";
