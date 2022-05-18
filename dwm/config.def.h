@@ -69,25 +69,29 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[]      = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray2, NULL };
-static const char *ytcmd[]         = { "myyt", NULL };
-static const char *termcmd[]       = { "st", NULL };
 static const char scratchpadname[] = "music";
-static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", "-e", "cmus", NULL };
+static const char *dmenucmd[]      = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray2, NULL };
+static const char *acmecmd[]       = { "a", NULL };
 static const char *lowervol[]      = { "amixer", "sset", "Master", "5%-", NULL };
-static const char *raisevol[]      = { "amixer", "sset", "Master", "5%+", NULL };
-static const char *webcmd[]        = { "firefox", NULL };
 static const char *passcmd[]       = { "passmenu", NULL };
+static const char *projcmd[]       = { "ap", NULL };
+static const char *raisevol[]      = { "amixer", "sset", "Master", "5%+", NULL };
+static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", "-e", "cmus", NULL };
+static const char *termcmd[]       = { "st", NULL };
+static const char *webcmd[]        = { "firefox", NULL };
+static const char *ytcmd[]         = { "myyt", NULL };
 
 static Key keys[] = {
 	/* modifier           key           function        argument */
 	{ MODKEY,             XK_Return,    spawn,          {.v = termcmd} },
 	{ MODKEY,             XK_minus,     spawn,          {.v = lowervol} },
 	{ MODKEY,             XK_p,         spawn,          {.v = passcmd} },
+	{ MODKEY,             XK_plus,      spawn,          {.v = raisevol} },
 	{ MODKEY,             XK_r,         spawn,          {.v = dmenucmd} },
 	{ MODKEY,             XK_w,         spawn,          {.v = webcmd} },
-	{ MODKEY,             XK_plus,      spawn,          {.v = raisevol} },
 	{ MODKEY,             XK_y,         spawn,          {.v = ytcmd } },
+	{ MODKEY|ControlMask, XK_Return,    spawn,          {.v = acmecmd } },
+	{ MODKEY|ControlMask, XK_p,         spawn,          {.v = projcmd } },
 	{ MODKEY,             XK_m,         togglescratch,  {.v = scratchpadcmd } },
 	{ MODKEY,             XK_b,         togglebar,      {0} },
 	{ MODKEY,             XK_j,         focusstack,     {.i = +1} },
