@@ -96,7 +96,7 @@ char *termname = "st-256color";
 unsigned int tabspaces = 8;
 
 /* bg opacity*/
-float alpha = 1;
+float alpha = 0.8;
 
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
@@ -106,19 +106,15 @@ static const char *colorname[] = {
 	"green3",
 	"yellow3",
 	"blue2",
-	/*"#900000",*/
 	"magenta3",
 	"cyan3",
 	"gray90",
-	/**/
-	/* 8 bright colors */
+		/* 8 bright colors */
 	"gray50",
-	/*"red",*/
-	"blue2",
+	"red",
 	"green",
 	"yellow",
-	/*"blue2",*/
-	"#900000",
+	"#5c5cff",
 	"magenta",
 	"cyan",
 	"white",
@@ -128,9 +124,9 @@ static const char *colorname[] = {
 	/* More colors can be added after 255 to use with DefaultXX */
 	"#cccccc",
 	"#555555",
-	"#000000",
+	"#282828",
 	"#ffffea",
-	"#c2c3c7",
+	"#d5c4a1",
 };
 
 
