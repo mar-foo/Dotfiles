@@ -9,12 +9,12 @@ static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "IBM Plex Mono:size=11", "FontAwesome:size=7" };
 static const char dmenufont[]       = "IBM Plex Mono:size=11";
-static const char col_gray1[]       = "#282828";
-static const char col_gray2[]       = "#fb4934"; // "#ff004d";
-static const char col_gray3[]       = "#d5c4a1";
-static const char col_gray4[]       = "#fb4934"; // "#ff004d";
-static const char col_cyan[]        = "#282828";
-static const char col_occ[]         = "#98971a"; // "#008751";
+static const char col_gray1[]       = "#0b0f10";
+static const char col_gray2[]       = "#ee6a70"; // "#ff004d";
+static const char col_gray3[]       = "#c5c8c9";
+static const char col_gray4[]       = "#ee6a70"; // "#ff004d";
+static const char col_cyan[]        = "#0b0f10";
+static const char col_occ[]         = "#7ba5dd"; // "#008751";
 static const char *colors[][4]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_occ   },
