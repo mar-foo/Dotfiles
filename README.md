@@ -3,7 +3,7 @@ This repository holds my personal configuration for a few programs that
 I use, and a few scripts that I wrote to automate some simple tasks.
 
 ## Screenshot
-(./scrot.png)
+![Screenshot](./scrot.png)
 
 ## Setup:
 
