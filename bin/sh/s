@@ -1,0 +1,24 @@
+#!/bin/sh
+# s - session attach / detach with abduco
+# Arguments can be:
+# - a -> alsamixer
+# - d -> dvtm
+# - m -> music (cmus)
+
+usage() {
+	echo "usage: $0 [d|m|a]" >&2 
+	exit 1
+}
+
+[ $# -eq 1 ] || usage
+
+case "$1" in
+	a) abduco -A alsa alsamixer
+	;;
+	d) abduco -A dvtm dvtm-status
+	;;
+	m) abduco -A music cmus
+	;;
+	*) usage
+	;;
+esac

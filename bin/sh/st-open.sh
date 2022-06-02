@@ -1,23 +1,8 @@
 #!/bin/sh
+abduco_running=$(abduco | grep dvtm)
 
-xidfile="$HOME/.cache/tabbed-st.xid"
-
-runtabbed() {
-	tabbed -c -dn tabbed-st -r 2 st -w '' >"$xidfile" \
-		2>/dev/null &
-}
-
-if [ ! -r "$xidfile" ];
-then
-	runtabbed
+if ! -z $abduco_running; then
+	st -e "/bin/sh -c 'abduco -a dvtm'"
 else
-	xid=$(cat "$xidfile")
-	xprop -id "$xid" >/dev/null 2>&1
-	if [ $? -gt 0 ];
-	then
-		runtabbed
-	else
-		st -w "$xid" >/dev/null 2>&1 &
-	fi
+	st -e "abduco -c dvtm"
 fi
-

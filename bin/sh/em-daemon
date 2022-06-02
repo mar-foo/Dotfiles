@@ -1,0 +1,7 @@
+#!/bin/sh
+running=$(pgrep emacs &>/dev/nul)
+if ! $running; then
+    emacs --daemon
+fi
+
+emacsclient -c

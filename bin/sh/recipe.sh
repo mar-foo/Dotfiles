@@ -21,9 +21,10 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-cd /tmp
-curl -LO https://based.cooking/index.html 2>/dev/null
-recipe=$(sed '0,/id=artlist/d;/<\/ul>/,$d;s/^.*\">//;s/<\/a.*$//' /tmp/index.html | dmenu -i -l 20 -p "Recipe: ")
-recipe_address=$(grep "$recipe" /tmp/index.html | cut -d\" -f2)
+recipe="$(curl https://based.cooking/index.html 2>/dev/null | \
+	sed '0,/id=artlist/d;/<\/ul>/,$d;s/^.*\">//;s/<\/a.*$//' | \
+	dmenu -i -l 20 -p "Recipe: " | xargs grep "$1" | cut -d\" -f2)"
+
+[ -z "$recipe" ] && exit
+
 ${BROWSER:-surf-open.sh} https://based.cooking/$recipe_address
-rm /tmp/index.html

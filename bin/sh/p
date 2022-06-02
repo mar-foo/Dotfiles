@@ -1,0 +1,16 @@
+#!/bin/sh
+if [ -z "$PROJECT_DIRS" ]; then
+	PROJECT_DIRS=$HOME/src/*:$HOME/proj/
+else
+	PROJECT_DIRS=$PROJECT_DIRS:$HOME/src:$HOME/proj
+fi
+
+find_project() {
+	IFS=:; set --
+	set -- "$@" ${1:-$PROJECT_DIRS}
+	unset IFS
+	FZF_DEFAULT_OPTS=--reverse
+	find "$@" -maxdepth 1 -type d | fzf
+}
+
+[ $# -eq 0 ] && cd "$(find_project)"

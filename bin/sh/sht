@@ -1,0 +1,29 @@
+#!/bin/sh
+if [ -z "$PROJECT_DIRS" ]; then
+	PROJECT_DIRS=$HOME/src/*:$HOME/proj/
+else
+	PROJECT_DIRS=$PROJECT_DIRS:$HOME/src:$HOME/proj
+fi
+
+find_project() {
+	IFS=:; set --
+	set -- "$@" ${1:-$PROJECT_DIRS}
+	unset IFS
+	FZF_DEFAULT_OPTS=--reverse
+	find "$@" -maxdepth 1 -type d | fzf
+}
+
+create_tmux_session() {
+	session_name="$(basename "$1" | sed 's/\./_/g')"
+	if ! $(tmux has-session -t "$session_name"); then
+		tmux new-session -d -s "$session_name" -c "$1"
+	fi
+	if test -z "$TMUX"; then
+		tmux a -t "$session_name"
+	else
+		tmux switch -t "$session_name"
+	fi
+}
+
+[ $# -eq 0 ] && create_tmux_session "$(find_project)"
+

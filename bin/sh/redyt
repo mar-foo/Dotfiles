@@ -1,30 +1,8 @@
 #!/bin/sh
-# MIT/X Consortium License
-
-# © 2021 Mario Forzanini <mario.forzanini@studenti.unimi.it>
-
-# Permission is hereby granted, free of charge, to any person obtaining a copy of
-# this software and associated documentation files (the "Software"), to deal in
-# the Software without restriction, including without limitation the rights to
-# use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
-# of the Software, and to permit persons to whom the Software is furnished to do
-# so, subject to the following conditions:
-
-# The above copyright notice and this permission notice shall be included in all
-# copies or substantial portions of the Software.
-
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
-
 
 if [ -z $1 ]; then
   echo -n "Search query: ";
-  subreddit=$(cat ~/.config/redyt/subreddit.txt | dmenu -c -l 15 -g 3 -p "Select Subreddit r/" -i -l 10 | cut -d\| -f1 | awk '{$1=$1;print}')
+  subreddit=$(cat ~/.config/redyt/subreddit.txt | dmenu -p "Select Subreddit r/" -i | cut -d\| -f1 | awk '{$1=$1;print}')
   if [ "$subreddit" == "" ]; then exit; fi
 else
   subreddit=$1
@@ -33,7 +11,7 @@ fi
 cachedir=$HOME/.cache/redyt
 limit=100
 notify-send "📩 Downloading your 🖼️ Memes"
-curl -H "User-agent: 'your bot 0.1'" https://www.reddit.com/r/$subreddit/hot.json?limit=$limit > $cachedir/tmp.json &&
+curl -H "User-agent: 'your bot 0.1'" https://www.reddit.com/r/$subreddit/hot.json?limit=$limit > $cachedir/tmp.json && \
 imgs=$(cat $cachedir/tmp.json | jq '.' | grep url_overridden_by_dest | grep -Eo "https://.*(jpg|png)\b")
 
 wget -P $cachedir $imgs

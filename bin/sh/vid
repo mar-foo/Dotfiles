@@ -1,0 +1,13 @@
+#!/bin/sh
+if ! test $# -eq 0; then
+ echo "usage: $0 " 1>&2
+ exit 1
+fi
+
+clip="$(xclip -o)"
+if [ -z "$clip" ]; then
+	herbe "Clipboard is empty" "Want to swap selections?" && xclip -selection clipboard -o | xclip -i
+	clip="$(xclip -o)"
+fi
+
+mpv --ytdl-format='bestvideo[height<=720]+bestaudio' "$clip"
