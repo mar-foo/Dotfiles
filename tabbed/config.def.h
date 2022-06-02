@@ -2,10 +2,10 @@
 
 /* appearance */
 static const char font[]        = "Cousine:size=10";
-static const char* normbgcolor  = "#222222";
-static const char* normfgcolor  = "#bbbbbb";
-static const char* selbgcolor   = "#005577";
-static const char* selfgcolor   = "#eeeeee";
+static const char* normbgcolor  = "#0b0f10";
+static const char* normfgcolor  = "#c5c8c9";
+static const char* selbgcolor   = "#ee6a70";
+static const char* selfgcolor   = "#0b0f10";
 static const char* urgbgcolor   = "#111111";
 static const char* urgfgcolor   = "#cc0000";
 static const char before[]      = "<";
