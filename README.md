@@ -10,7 +10,7 @@ I use, and a few scripts that I wrote to automate some simple tasks.
 - WM: [dwm](https://dwm.suckless.org)
 - Terminal: [st](https://st.suckless.org)
 - Menu/Application launcher: [dmenu](https://tools.suckless.org/dmenu)
-- Editor: [vis](https://github.com/martanne/vis) / [kakoune](https://github.com/mawww/kakoune)
+- Editor: [Emacs](https://gnu.org/software/emacs/) ([vis](https://github.com/martanne/vis) / [kakoune](https://github.com/mawww/kakoune))
 - Browser: [surf](https://surf.suckless.org)
 - Font: IBM Plex Mono Italic
 
