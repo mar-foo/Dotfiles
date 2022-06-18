@@ -1,0 +1,18 @@
+#!/bin/sh
+bind ^L=clear-screen
+alias k='kak'
+alias m='neomutt'
+alias n='nnn'
+alias v='vis'
+
+# user sv
+usv() {
+	if [[ $# -ne 2 ]]; then
+		sv
+	else
+		sv $1 "$HOME/service/$2"
+	fi
+}
+
+export PS1="\$(basename \${PWD}) $ "
+fortune ; echo

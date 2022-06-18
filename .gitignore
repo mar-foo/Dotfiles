@@ -25,3 +25,9 @@ tabbed/tabbed.o
 tabbed/tabbed
 tabbed/xembed.o
 tabbed/xembed
+service/dwmbar/supervise/*
+service/emacs/supervise/*
+service/fontsrv/supervise/*
+service/picom/supervise/*
+service/plumber/supervise/*
+service/tiramisu/supervise/*
