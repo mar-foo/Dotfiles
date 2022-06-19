@@ -1,0 +1,50 @@
+# Uni
+IMAPStore mario.forzanini@studenti.unimi.it-remote
+Host mailserver.unimi.it
+Port 993
+User mario.forzanini@studenti.unimi.it
+PassCmd "pass mario.forzanini@studenti.unimi.it"
+AuthMechs LOGIN
+SSLType IMAPS
+# CertificateFile /etc/ssl/certs.pem
+
+MaildirStore mario.forzanini@studenti.unimi.it-local
+Subfolders Verbatim
+Path /home/mario/.local/share/mail/mario.forzanini@studenti.unimi.it/
+Inbox /home/mario/.local/share/mail/mario.forzanini@studenti.unimi.it/INBOX
+
+Channel mario.forzanini@studenti.unimi.it
+Expunge Both
+Master :mario.forzanini@studenti.unimi.it-remote:
+Slave :mario.forzanini@studenti.unimi.it-local:
+Patterns * !"[Gmail]/All Mail"
+Create Both
+SyncState *
+MaxMessages 0
+ExpireUnread no
+
+# End profile Uni
+
+IMAPStore mf@marioforzanini.com-remote
+Host mail.marioforzanini.com
+Port 993
+User mf
+PassCmd "pass mf@marioforzanini.com"
+AuthMechs LOGIN
+SSLType IMAPS
+# CertificateFile /etc/ssl/certs.pem
+
+MaildirStore mf@marioforzanini.com-local
+Subfolders Verbatim
+Path /home/mario/.local/share/mail/mf@marioforzanini.com/
+Inbox /home/mario/.local/share/mail/mf@marioforzanini.com/INBOX
+
+Channel mf@marioforzanini.com
+Expunge Both
+Master :mf@marioforzanini.com-remote:
+Slave :mf@marioforzanini.com-local:
+Patterns *
+Create Both
+SyncState *
+MaxMessages 0
+ExpireUnread no
